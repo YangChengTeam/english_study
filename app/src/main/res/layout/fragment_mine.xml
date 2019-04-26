@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:english="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <import type="yc.com.english_study.index.utils.UserInfoHelper" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/mine_top_bg"
+            android:orientation="vertical">
+
+            <yc.com.english_study.base.widget.MainToolBar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/t15dp"
+                android:layout_marginTop="@dimen/t8dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/t55dp"
+                    android:layout_height="@dimen/t55dp"
+                    android:src="@mipmap/default_avtor" />
+
+                <TextView
+                    android:id="@+id/tv_user_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/t10dp"
+                    android:text="@{`用户ID: `+UserInfoHelper.getUid()}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t18sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-15dp"
+            android:background="@drawable/mine_content_bg"
+            android:orientation="vertical">
+
+            <yc.com.english_study.mine.widget.BaseSettingView
+                android:id="@+id/baseSettingView_dredge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/t5dp"
+                english:settingIcon="@mipmap/dredge_vip"
+                english:settingTitle="@string/dredge_vip" />
+
+            <yc.com.english_study.mine.widget.BaseSettingView
+                android:id="@+id/baseSettingView_equities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                english:settingIcon="@mipmap/equities_vip"
+                english:settingTitle="@string/vip_equities" />
+
+            <yc.com.english_study.mine.widget.BaseSettingView
+                android:id="@+id/baseSettingView_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                english:settingIcon="@mipmap/my_order"
+                english:settingTitle="@string/my_order" />
+
+            <yc.com.english_study.mine.widget.BaseSettingView
+                android:id="@+id/baseSettingView_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                english:settingIcon="@mipmap/share_friend"
+                english:settingTitle="@string/share_friend" />
+
+            <yc.com.english_study.mine.widget.BaseSettingView
+                android:id="@+id/baseSettingView_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                english:settingIcon="@mipmap/service_wx"
+                english:settingTitle="@string/service_wx" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</layout>

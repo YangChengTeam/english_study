@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="java.util.List" />
+
+        <variable
+            name="images"
+            type="List&lt;Integer>" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="416dp">
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="416dp"
+            app:image_scale_type="center_inside"
+            app:images="@{images}"
+            app:indicator_drawable_selected="@drawable/guide_circle_selected"
+            app:indicator_drawable_unselected="@drawable/guide_circle_unselect"
+            app:indicator_height="@dimen/t12dp"
+            app:indicator_margin="@dimen/t6dp"
+            app:indicator_width="@dimen/t12dp" />
+
+        <ImageView
+            android:id="@+id/iv_start_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/t70dp"
+            android:src="@mipmap/start_study_btn"
+            android:visibility="gone" />
+
+    </FrameLayout>
+</layout>
