@@ -62,4 +62,41 @@ public interface UrlConfig {
 
 
     String index_menu_url = (isDebug ? debug_url : base_url) + "index/menu_adv";
+
+    /**
+     * 微课列表
+     */
+    String weike_list_url = (isDebug ? debug_url : base_url) + "weike/weike_list";
+
+    /**
+     * 订单列表
+     */
+    String order_list = (isDebug ? debug_url : base_url) + "orders/orders_list";
+
+    /**
+     * 音标入门数目
+     */
+    String phonetic_count_url = (isDebug ? debug_url : base_url) + "letters/count";
+
+    /**
+     * 音标详情
+     */
+    String phonetic_detail_url = (isDebug ? debug_url : base_url) + "letters/detail";
+
+    /**
+     * 所有入门单词集合
+     */
+    String phonetic_word_all = (isDebug ? debug_url : base_url) + "letters/all";
+
+
+    /**
+     * 获取分享内容
+     */
+    String share_info_url = (isDebug ? debug_url : base_url) + "share/info";
+
+    /**
+     * 分享解锁接口
+     */
+    String share_reward_url = (isDebug ? debug_url : base_url) + "share/reward";
+
 }

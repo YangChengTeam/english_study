@@ -59,6 +59,7 @@ public class PpAudioManager implements OnAVManagerListener {
         this.mStep = playStep;
         stopMusic();
 
+//        LogUtil.msg("url: " + musicUrl);
         if (TextUtils.isEmpty(musicUrl)) return;
         if (null == mMediaPlayer) {
             mMediaPlayer = new MediaPlayer();

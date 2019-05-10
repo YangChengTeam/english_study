@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_home"
-        android:enabled="true"
-        android:icon="@drawable/main_phonetic_selector"
 
-        android:title="@string/main_phonetic" />
 
     <item
         android:id="@+id/navigation_study"
@@ -19,9 +14,15 @@
         android:icon="@drawable/main_category_selector"
         android:enabled="true"
         android:title="@string/main_category" />
+
     <item
-        android:id="@+id/navigation_1vs1"
-        android:icon="@drawable/main_1vs1_selector"
+        android:id="@+id/navigation_discover"
+        android:enabled="true"
+        android:icon="@drawable/main_discover_selector"
+        android:title="@string/main_discover" />
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/main_main_selector"
         android:enabled="true"
         android:title="@string/main_1vs1" />
 

@@ -11,19 +11,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/app_selected_color">
+            android:layout_height="match_parent">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/t15dp"
-                android:src="@mipmap/vip_equities_introduce" />
+                android:layout_height="match_parent"
+                android:background="@color/app_selected_color">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/t15dp"
+                    android:src="@mipmap/vip_equities_introduce" />
 
+            </LinearLayout>
 
+        </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 </layout>

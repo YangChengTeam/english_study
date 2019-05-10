@@ -18,6 +18,7 @@ import java.util.List;
 
 import yc.com.base.BaseActivity;
 import yc.com.english_study.base.widget.BaseToolBar;
+import yc.com.english_study.mine.widget.BaseSettingView;
 import yc.com.english_study.study.widget.MediaPlayerView;
 
 /**
@@ -45,7 +46,7 @@ public class ViewAttrBinding {
         if (errorDrawable != 0) {
             request.error(errorDrawable);
         }
-        request.diskCacheStrategy(DiskCacheStrategy.RESULT).skipMemoryCache(true).into(imageView);
+        request.diskCacheStrategy(DiskCacheStrategy.RESULT).skipMemoryCache(false).into(imageView);
     }
 
     @BindingAdapter({"app:mediaPath"})
@@ -90,6 +91,11 @@ public class ViewAttrBinding {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+    }
+
+    @BindingAdapter(value = {"app:centerTitle"})
+    public static void setCenterTilte(BaseSettingView baseSettingView, CharSequence charSequence) {
+        baseSettingView.setCentTitle(charSequence);
     }
 
 

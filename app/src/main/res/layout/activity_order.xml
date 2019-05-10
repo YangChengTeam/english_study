@@ -11,32 +11,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <RelativeLayout
+        <yc.com.english_study.base.widget.StateView
+            android:id="@+id/stateView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@color/gray_f1f1f1" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/t15dp"
-                android:layout_marginRight="@dimen/t15dp"
-                android:paddingTop="@dimen/t46dp" />
+                android:background="@color/white">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/t15dp"
+                    android:layout_marginRight="@dimen/t15dp"
+                    android:paddingTop="@dimen/t46dp" />
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/t31dp"
-                android:layout_gravity="center"
-                android:background="@color/orange_fef4d6"
-                android:gravity="center"
-                android:text="@string/study_hint"
-                android:textColor="@color/red_f86e54"
-                android:textSize="@dimen/t13sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/t31dp"
+                    android:layout_gravity="center"
+                    android:background="@color/orange_fef4d6"
+                    android:gravity="center"
+                    android:text="@string/study_hint"
+                    android:textColor="@color/red_f86e54"
+                    android:textSize="@dimen/t13sp" />
 
-        </RelativeLayout>
-
+            </RelativeLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 </layout>

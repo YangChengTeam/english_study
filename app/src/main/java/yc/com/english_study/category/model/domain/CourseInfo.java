@@ -83,6 +83,9 @@ public class CourseInfo implements Parcelable {
 
     private String desp;
 
+
+    private String weikePrice;
+
     public String getHtml() {
         return html;
     }
@@ -332,6 +335,15 @@ public class CourseInfo implements Parcelable {
 
     public void setDesp(String desp) {
         this.desp = desp;
+    }
+
+
+    public String getWeikePrice() {
+        return weikePrice;
+    }
+
+    public void setWeikePrice(String weikePrice) {
+        this.weikePrice = weikePrice;
     }
 
     @Override

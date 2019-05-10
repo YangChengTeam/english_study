@@ -42,6 +42,7 @@ public class WordInfo extends BaseObservable implements Parcelable {
     private int type;
 
 
+
     public String getId() {
         return id;
     }

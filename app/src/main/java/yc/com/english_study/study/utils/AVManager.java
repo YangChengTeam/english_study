@@ -73,7 +73,7 @@ public class AVManager implements OnAVManagerListener {
 
         mIat = SpeechRecognizer.createRecognizer(context, mInitListener);
         mSharedPreferences = context.getSharedPreferences(IatSettings.PREFER_NAME, Activity.MODE_PRIVATE);
-
+        AVMediaManager.getInstance().addAudioManager(this);
         setParam(parent);
 
     }

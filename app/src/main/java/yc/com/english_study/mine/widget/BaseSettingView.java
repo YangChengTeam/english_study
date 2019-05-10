@@ -22,6 +22,8 @@ public class BaseSettingView extends BaseView {
     ImageView ivIcon;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_centet_tile)
+    TextView tvCentetTile;
     private String title;
     private Drawable mDrawable;
 
@@ -44,5 +46,9 @@ public class BaseSettingView extends BaseView {
     @Override
     public int getLayoutId() {
         return R.layout.base_setting_view;
+    }
+
+    public void setCentTitle(CharSequence charSequence) {
+        tvCentetTile.setText(charSequence);
     }
 }

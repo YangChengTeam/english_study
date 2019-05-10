@@ -3,6 +3,7 @@ package yc.com.english_study.index.utils;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
+import com.kk.securityhttp.domain.GoagalInfo;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.LogUtil;
@@ -11,6 +12,7 @@ import com.kk.utils.PreferenceUtil;
 import java.util.List;
 
 import rx.Subscriber;
+import rx.Subscription;
 import yc.com.blankj.utilcode.util.LogUtils;
 import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.english_study.base.constant.Config;
@@ -18,8 +20,10 @@ import yc.com.english_study.base.constant.SpConstant;
 import yc.com.english_study.base.model.domain.VipInfo;
 import yc.com.english_study.index.model.domain.ContactInfo;
 import yc.com.english_study.index.model.domain.IndexInfoWrapper;
+import yc.com.english_study.index.model.domain.ShareInfo;
 import yc.com.english_study.index.model.domain.UserInfo;
 import yc.com.english_study.pay.PayWayInfoHelper;
+import yc.com.english_study.study.model.domain.StudyPages;
 import yc.com.english_study.study.utils.EngineUtils;
 import yc.com.english_study.study_1vs1.model.bean.IndexDialogInfoWrapper;
 
@@ -193,6 +197,12 @@ public class UserInfoHelper {
         return isVip(Config.SUPER_VIP + "");
     }
 
+
+    public static boolean isShareSuccess() {
+
+        return SPUtils.getInstance().getBoolean(GoagalInfo.get().uuid, false);
+    }
+
     public static void getIndexMenuInfo(Context context) {
         EngineUtils.getIndexMenuInfo(context).subscribe(new Subscriber<ResultInfo<IndexDialogInfoWrapper>>() {
             @Override
@@ -244,4 +254,51 @@ public class UserInfoHelper {
             }
         });
     }
+
+    public static void getPhoneticPages(Context context) {
+
+        EngineUtils.getPhoneticPages(context).subscribe(new Subscriber<ResultInfo<StudyPages>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<StudyPages> stringResultInfo) {
+                if (stringResultInfo != null && stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
+                    SPUtils.getInstance().put(SpConstant.PHONETIC_PAGES, stringResultInfo.data.count);
+                }
+
+            }
+        });
+
+    }
+
+    public static void getStudyPages(Context context) {
+        EngineUtils.getStudyPages(context).subscribe(new Subscriber<ResultInfo<StudyPages>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<StudyPages> studyPagesResultInfo) {
+                if (studyPagesResultInfo != null && studyPagesResultInfo.code == HttpConfig.STATUS_OK && studyPagesResultInfo.data != null) {
+                    SPUtils.getInstance().put(SpConstant.STUDY_PAGES, studyPagesResultInfo.data.count);
+                }
+            }
+        });
+    }
+
+
 }

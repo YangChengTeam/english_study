@@ -34,18 +34,11 @@ public class StudyVowelPresenter extends BasePresenter<StudyVowelEngine, StudyVo
     @Override
     public void loadData(boolean isForceUI, boolean isLoadingUI) {
         if (!isForceUI) return;
-        getVowelInfos();
 
 
     }
 
-    private void getVowelInfos() {
-//        List<WordInfo> wordInfos = SoundmarkHelper.getWordInfos();
-//
-//        if (wordInfos != null) {
-//            combinationData(wordInfos, new ArrayList<List<WordInfo>>());
-//        }
-
+    public void getVowelInfos() {
 
         Subscription subscription = mEngine.getVowelInfos().subscribe(new Subscriber<ResultInfo<VowelInfoWrapper>>() {
             @Override
@@ -63,7 +56,7 @@ public class StudyVowelPresenter extends BasePresenter<StudyVowelEngine, StudyVo
                 if (vowelInfoWrapperResultInfo != null && vowelInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && vowelInfoWrapperResultInfo.data != null) {
                     List<WordInfo> infoList = vowelInfoWrapperResultInfo.data.getList();
 //                    mView.showVowelInfoList(infoList);
-                    SoundmarkHelper.setWordInfos(infoList);
+//                    SoundmarkHelper.setWordInfos(infoList);
                     List<List<WordInfo>> listList = new ArrayList<>();
                     combinationData(infoList, listList);
 
@@ -111,10 +104,71 @@ public class StudyVowelPresenter extends BasePresenter<StudyVowelEngine, StudyVo
                 break;
             }
         }
+
         mView.shoVowelNewInfos(listList);
 
 
     }
 
 
+    private void combinationPhoneticData(List<WordInfo> infoList, List<List<WordInfo>> listList) {
+        if (infoList == null || infoList.size() == 0) return;
+
+        if (listList == null) {
+            listList = new ArrayList<>();
+        }
+        int temp = 0;
+        for (int i = 0; i < infoList.size(); ) {
+            WordInfo wordInfo = infoList.get(i);
+//            LogUtil.msg("i-->" + i + "--size==" + infoList.size() + "---" + wordInfo.getType_text());
+            List<WordInfo> wordInfos = new ArrayList<>();
+            wordInfos.add(wordInfo);
+            for (int j = i + 1; j < infoList.size(); j++) {
+
+                WordInfo wordInfo1 = infoList.get(j);
+                if (TextUtils.equals(wordInfo.getType_text(), wordInfo1.getType_text())) {
+                    wordInfos.add(wordInfo1);
+                    if (j == infoList.size() - 1) {
+                        i = j;
+                        listList.add(wordInfos);
+                    }
+                } else {
+//                    temp = j;
+                    i = j;
+                    listList.add(wordInfos);
+                    break;
+                }
+
+            }
+            if (i == infoList.size() - 1) break;
+
+        }
+        mView.shoVowelNewInfos(listList);
+    }
+
+
+    @Override
+    public void getPhoneticWordInfos() {
+        Subscription subscription = mEngine.getPhoneticWordInfos().subscribe(new Subscriber<ResultInfo<VowelInfoWrapper>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<VowelInfoWrapper> vowelInfoWrapperResultInfo) {
+                if (vowelInfoWrapperResultInfo != null && vowelInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && vowelInfoWrapperResultInfo.data != null) {
+                    List<WordInfo> list = vowelInfoWrapperResultInfo.data.getList();
+                    List<List<WordInfo>> listList = new ArrayList<>();
+                    combinationPhoneticData(list, listList);
+                }
+            }
+        });
+        mSubscriptions.add(subscription);
+    }
 }

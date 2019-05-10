@@ -22,5 +22,7 @@ public interface CategoryMainContract {
     interface Presenter extends IPresenter {
 
         void getCategoryInfos(int page, int pageSize, String pid, boolean isRefresh);
+
+        void getWeiKeList(int page, int page_size, String pid,boolean isRefresh);
     }
 }

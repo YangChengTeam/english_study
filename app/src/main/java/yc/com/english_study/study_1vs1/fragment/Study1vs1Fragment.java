@@ -11,7 +11,6 @@ import android.webkit.WebView;
 import com.alibaba.fastjson.JSON;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.utils.LogUtil;
 import com.kk.utils.ToastUtil;
 
 import rx.functions.Action1;
@@ -22,10 +21,11 @@ import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.blankj.utilcode.util.ToastUtils;
 import yc.com.blankj.utilcode.util.UIUitls;
 import yc.com.english_study.R;
-import yc.com.english_study.base.activity.WebActivity;
 import yc.com.english_study.base.constant.Config;
 import yc.com.english_study.base.constant.SpConstant;
+import yc.com.english_study.databinding.FragmentStudy1vs1Binding;
 import yc.com.english_study.index.utils.UserInfoHelper;
+import yc.com.english_study.mine.activity.PhoneticActivity;
 import yc.com.english_study.pay.alipay.IAliPay1Impl;
 import yc.com.english_study.pay.alipay.IPayCallback;
 import yc.com.english_study.pay.alipay.IWXPay1Impl;
@@ -33,7 +33,6 @@ import yc.com.english_study.pay.alipay.LoadingDialog;
 import yc.com.english_study.pay.alipay.OrderInfo;
 import yc.com.english_study.study.utils.EngineUtils;
 import yc.com.english_study.study_1vs1.model.bean.SlideInfo;
-import yc.com.english_study.databinding.FragmentStudy1vs1Binding;
 
 /**
  * Created by wanglin  on 2018/10/24 17:21.
@@ -41,7 +40,7 @@ import yc.com.english_study.databinding.FragmentStudy1vs1Binding;
 public class Study1vs1Fragment extends BaseFragment<BasePresenter,FragmentStudy1vs1Binding> {
 
 
-    private String url = "https://vip.hfjy.com/zhuanzhu-m?adid=5b897ad136d8af77";
+    private String url = "http://m.upkao.com/ybzs.html";
 
 
     private Handler mHandler;
@@ -64,8 +63,8 @@ public class Study1vs1Fragment extends BaseFragment<BasePresenter,FragmentStudy1
 
 //        LogUtil.msg("url: init   "+url);
         mHandler = new Handler();
-        mDataBinding.mainToolbar.init((BaseActivity) getActivity(), WebActivity.class);
-        mDataBinding.mainToolbar.setTvRightTitleAndIcon(getString(R.string.diandu), R.mipmap.diandu);
+        mDataBinding.mainToolbar.init((BaseActivity) getActivity(), PhoneticActivity.class);
+        mDataBinding.mainToolbar.setTvRightTitleAndIcon(getString(R.string.phonetic_introduce), R.mipmap.index_phogetic_introduce);
         iAliPay = new IAliPay1Impl(getActivity());
         iwxPay = new IWXPay1Impl(getActivity());
         loadingDialog = new LoadingDialog(getActivity());

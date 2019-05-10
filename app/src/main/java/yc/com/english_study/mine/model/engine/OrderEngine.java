@@ -2,14 +2,24 @@ package yc.com.english_study.mine.model.engine;
 
 import android.content.Context;
 
+import com.alibaba.fastjson.TypeReference;
+import com.kk.securityhttp.domain.ResultInfo;
+import com.kk.securityhttp.engin.HttpCoreEngin;
+
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import yc.com.base.BaseEngine;
+import yc.com.english_study.base.constant.UrlConfig;
+import yc.com.english_study.index.utils.UserInfoHelper;
+import yc.com.english_study.mine.model.bean.OrderInfoWrapper;
 import yc.com.english_study.pay.alipay.OrderInfo;
 
 /**
@@ -91,4 +101,15 @@ public class OrderEngine extends BaseEngine {
             }
         });
     }
+
+    public Observable<ResultInfo<OrderInfoWrapper>> getOrderInfoList(int page, int page_size) {
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", UserInfoHelper.getUid());
+        params.put("page", page + "");
+        params.put("page_size", page_size + "");
+        return HttpCoreEngin.get(mContext).rxpost(UrlConfig.order_list, new TypeReference<ResultInfo<OrderInfoWrapper>>() {
+        }.getType(), params, true, true, true);
+    }
+
+
 }

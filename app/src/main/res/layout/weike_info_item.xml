@@ -21,9 +21,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/white_circle_bg"
         android:gravity="center"
-        android:orientation="vertical"
-
-        android:padding="@dimen/t5dp">
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -46,8 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"
-                android:layout_marginRight="@dimen/t5dp"
-                android:layout_marginTop="@dimen/t5dp"
                 android:src="@mipmap/is_vip_course_icon"
                 android:visibility="@{weiKeCategory.isVip==0?View.GONE:View.VISIBLE }" />
         </FrameLayout>
@@ -56,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/t5dp">
 
             <TextView
                 android:id="@+id/tv_title"

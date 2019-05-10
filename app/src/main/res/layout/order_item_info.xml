@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="2019-03-15 15:36:27"
+                android:text="@{orderInfo.getOrederTime()}"
                 android:textSize="@dimen/t12sp" />
 
         </RelativeLayout>
@@ -73,10 +73,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{orderInfo.name+`：`}"
+                    android:text="充值："
                     android:textColor="@color/gray_81817e"
-                    android:textSize="@dimen/t12sp"
-                    tools:text="充值：" />
+                    android:textSize="@dimen/t12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,8 +109,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{orderInfo.state==1?`已支付`:`待支付`}"
-                    android:textColor="@{orderInfo.state==1?@color/red_f14343:@color/gray_81817e}"
+                    android:text="@{orderInfo.state==4?`已支付`:`待支付`}"
+                    android:textColor="@{orderInfo.state==4?@color/gray_81817e:@color/red_f14343}"
                     android:textSize="@dimen/t14sp"
                     tools:text="待支付" />
             </LinearLayout>

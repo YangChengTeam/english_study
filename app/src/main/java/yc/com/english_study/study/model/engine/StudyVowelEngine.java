@@ -25,4 +25,11 @@ public class StudyVowelEngine extends BaseEngine {
         }.getType(), null, true, true, true);
 
     }
+
+
+    public Observable<ResultInfo<VowelInfoWrapper>> getPhoneticWordInfos() {
+        return HttpCoreEngin.get(mContext).rxpost(UrlConfig.phonetic_word_all, new TypeReference<ResultInfo<VowelInfoWrapper>>() {
+                }.getType(),
+                null, true, true, true);
+    }
 }

@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <import type="yc.com.english_study.study_1vs1.utils.LPUtils" />
+
+        <variable
+            name="studyPhoneticInfo"
+            type="yc.com.english_study.study.model.domain.StudyPhoneticInfo" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <yc.com.english_study.base.widget.StateView
+            android:id="@+id/stateView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_f1f1f1" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--发音感知-->
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/t12dp"
+                    android:paddingLeft="@dimen/t12dp"
+                    android:paddingRight="@dimen/t12dp"
+                    android:paddingTop="@dimen/t15dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_perception_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/t3dp"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/t4dp"
+                                android:layout_height="@dimen/t16dp"
+                                android:background="@drawable/study_guide_bg" />
+
+                            <TextView
+                                android:id="@+id/tv_perception"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/t5dp"
+                                android:text="字母在单词中的常见发音"
+                                android:textColor="@color/black_2d2825" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/t10dp"
+                            android:background="@mipmap/phonetic_pronunce_bg"
+                            android:paddingLeft="@dimen/t20dp"
+                            android:paddingRight="@dimen/t20dp"
+                            android:weightSum="5">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{studyPhoneticInfo.letters}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/t40sp"
+                                    android:textStyle="bold"
+                                    tools:text="Aa" />
+
+                                <ImageView
+                                    android:id="@+id/iv_phonetic_word"
+                                    android:layout_width="@dimen/t24dp"
+                                    android:layout_height="@dimen/t19dp"
+                                    android:src="@mipmap/big_trumpet" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/t60dp"
+                                    android:text="@{studyPhoneticInfo.fa}"
+                                    android:textSize="@dimen/t16sp"
+                                    tools:text="发" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <!---->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{studyPhoneticInfo.pronunciation}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/t40sp"
+                                    android:textStyle="bold"
+                                    tools:text="/a/" />
+
+                                <ImageView
+                                    android:id="@+id/iv_phonetic_pronunciation"
+                                    android:layout_width="@dimen/t24dp"
+                                    android:layout_height="@dimen/t19dp"
+                                    android:src="@mipmap/big_trumpet" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--发音学习-->
+                <LinearLayout
+                    android:id="@+id/ll_study_total_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="@dimen/t8dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/t15dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_study_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/t4dp"
+                                android:layout_height="@dimen/t16dp"
+                                android:background="@drawable/study_guide_bg" />
+
+                            <TextView
+                                android:id="@+id/tv_faying_study"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/t5dp"
+                                android:text="常见单词练习"
+                                android:textColor="@color/black_2d2825" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="151dp"
+                            android:layout_marginTop="@dimen/t10dp">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="@dimen/t3dp"
+                                android:layout_marginLeft="@dimen/t3dp"
+                                android:layout_marginRight="@dimen/t7dp"
+                                android:layout_marginTop="@dimen/t3dp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="@dimen/t5dp"
+                                app:cardElevation="@dimen/t3dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="1">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            app:error="@{0}"
+                                            app:imageUrl="@{studyPhoneticInfo.word1_pic}"
+                                            app:placeHolder="@{0}" />
+
+
+                                    </RelativeLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/t5dp"
+                                        android:layout_marginTop="@dimen/t5dp">
+
+                                        <RelativeLayout
+                                            android:id="@+id/rl_practice_word_left"
+                                            android:layout_width="@dimen/t50dp"
+                                            android:layout_height="@dimen/t50dp">
+
+                                            <ImageView
+                                                android:id="@+id/iv_practice_word_left"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerInParent="true"
+                                                android:src="@mipmap/word_practice_trumpet" />
+                                        </RelativeLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content">
+
+
+                                                <TextView
+                                                    android:id="@+id/tv_practice_left_up"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="@{Html.fromHtml(LPUtils.getInstance().addPhraseLetterColor(studyPhoneticInfo!=null?studyPhoneticInfo.word1:``))}"
+                                                    android:textColor="@color/black_2c2826" />
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/t8dp"
+                                                    android:text="@{studyPhoneticInfo.word1_hanzi}"
+                                                    android:textColor="@color/black_2c2826" />
+                                            </LinearLayout>
+
+                                            <!---->
+                                            <TextView
+                                                android:id="@+id/tv_practice_left_down"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="@dimen/t3dp"
+                                                android:text="@{Html.fromHtml(LPUtils.getInstance().addPhraseLetterColor(studyPhoneticInfo!=null?studyPhoneticInfo.word1_pron:``))}"
+                                                android:textColor="@color/black_2c2826" />
+                                        </LinearLayout>
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+
+                            </android.support.v7.widget.CardView>
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="@dimen/t3dp"
+                                android:layout_marginLeft="@dimen/t7dp"
+                                android:layout_marginRight="@dimen/t3dp"
+                                android:layout_marginTop="@dimen/t3dp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardCornerRadius="@dimen/t5dp"
+                                app:cardElevation="@dimen/t3dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="1">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            app:error="@{0}"
+                                            app:imageUrl="@{studyPhoneticInfo.word2_pic}"
+                                            app:placeHolder="@{0}" />
+
+                                    </RelativeLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/t5dp"
+                                        android:layout_marginTop="@dimen/t5dp">
+
+                                        <RelativeLayout
+                                            android:id="@+id/rl_practice_word_right"
+                                            android:layout_width="@dimen/t50dp"
+                                            android:layout_height="@dimen/t50dp">
+
+                                            <ImageView
+                                                android:id="@+id/iv_practice_word_right"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerInParent="true"
+                                                android:src="@mipmap/word_practice_trumpet" />
+                                        </RelativeLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
+                                            android:gravity="center"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content">
+
+                                                <!---->
+                                                <TextView
+                                                    android:id="@+id/tv_practice_right_up"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="@{Html.fromHtml(LPUtils.getInstance().addPhraseLetterColor(studyPhoneticInfo!=null?studyPhoneticInfo.word2:``))}"
+                                                    android:textColor="@color/black_2c2826" />
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/t8dp"
+                                                    android:text="@{studyPhoneticInfo.word2_hanzi}"
+                                                    android:textColor="@color/black_2c2826" />
+                                            </LinearLayout>
+
+                                            <!---->
+                                            <TextView
+                                                android:id="@+id/tv_practice_right_down"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="@dimen/t3dp"
+                                                android:text="@{Html.fromHtml(LPUtils.getInstance().addPhraseLetterColor(studyPhoneticInfo!=null?studyPhoneticInfo.word2_pron:``))}"
+                                                android:textColor="@color/black_2c2826" />
+                                        </LinearLayout>
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+
+                            </android.support.v7.widget.CardView>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--发音练习-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="224dp"
+                    android:layout_marginTop="@dimen/t8dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/t15dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_practice_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/t4dp"
+                                android:layout_height="@dimen/t16dp"
+                                android:background="@drawable/study_guide_bg" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/t5dp"
+                                android:text="记忆小口诀"
+                                android:textColor="@color/black_2d2825" />
+
+                        </LinearLayout>
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/t15dp"
+                            app:error="@{0}"
+                            app:imageUrl="@{studyPhoneticInfo.memory}"
+                            app:placeHolder="@{0}" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--发音要领-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="244dp"
+                    android:layout_marginTop="@dimen/t8dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/t12dp"
+                    android:paddingLeft="@dimen/t12dp"
+                    android:paddingRight="@dimen/t12dp"
+                    android:paddingTop="@dimen/t15dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_essentials_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/t5dp"
+                            android:layout_marginLeft="@dimen/t3dp"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/t4dp"
+                                android:layout_height="@dimen/t16dp"
+                                android:background="@drawable/study_guide_bg" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/t5dp"
+                                android:text="趣味句子巩固"
+                                android:textColor="@color/black_2d2825" />
+                        </LinearLayout>
+
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/t3dp"
+                            android:background="@color/white"
+                            app:cardCornerRadius="@dimen/t10dp"
+                            app:cardElevation="@dimen/t3dp"
+                            app:contentPadding="@dimen/t10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <RelativeLayout
+                                    android:id="@+id/rl_essentials"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@mipmap/phonetic_consolidate_left_bg"
+                                    android:paddingLeft="@dimen/t5dp"
+                                    android:paddingRight="@dimen/t18dp">
+
+                                    <ImageView
+                                        android:id="@+id/iv_essentials_example"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/study_essentials_example"
+                                        app:error="@{0}"
+                                        app:imageUrl="@{studyPhoneticInfo.sentence_pic}"
+                                        app:placeHolder="@{0}" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@mipmap/phonetic_consolidate_right_bg"
+                                    android:paddingLeft="@dimen/t15dp"
+                                    android:paddingRight="@dimen/t8dp">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/study_essentials_example"
+                                        app:error="@{0}"
+                                        app:imageUrl="@{studyPhoneticInfo.sentence}"
+                                        app:placeHolder="@{0}" />
+
+                                </RelativeLayout>
+
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!--发音运用-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/t8dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/t12dp"
+                    android:paddingLeft="@dimen/t12dp"
+                    android:paddingRight="@dimen/t12dp"
+                    android:paddingTop="@dimen/t15dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_apply_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/t3dp"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/t4dp"
+                                android:layout_height="@dimen/t16dp"
+                                android:background="@drawable/study_guide_bg" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/t5dp"
+                                android:text="温馨小提示"
+                                android:textColor="@color/black_2d2825" />
+
+                        </LinearLayout>
+
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/t3dp"
+                            android:background="@color/white"
+                            app:cardCornerRadius="@dimen/t10dp"
+                            app:cardElevation="@dimen/t3dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/phonetic_tint_bg"
+                                android:padding="@dimen/t8dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{studyPhoneticInfo.tips}"
+                                    android:textColor="@color/orange_984523" />
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</layout>

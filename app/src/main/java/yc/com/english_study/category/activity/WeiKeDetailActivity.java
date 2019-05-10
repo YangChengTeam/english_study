@@ -1,5 +1,6 @@
 package yc.com.english_study.category.activity;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -15,13 +16,17 @@ import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.kk.utils.LogUtil;
 import com.xinqu.videoplayer.XinQuVideoPlayer;
 import com.xinqu.videoplayer.XinQuVideoPlayerStandard;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
 
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
+import yc.com.base.StatusBarUtil;
 import yc.com.blankj.utilcode.util.LogUtils;
 import yc.com.blankj.utilcode.util.NetworkUtils;
 import yc.com.blankj.utilcode.util.SizeUtils;
@@ -34,6 +39,7 @@ import yc.com.english_study.category.presenter.WeiKeDetailPresenter;
 import yc.com.english_study.databinding.CommonActivityWeikeDetailBinding;
 import yc.com.english_study.index.model.domain.UserInfo;
 import yc.com.english_study.index.utils.UserInfoHelper;
+import yc.com.english_study.mine.activity.PayActivity;
 
 /**
  * Created by wanglin  on 2017/9/6 08:32.
@@ -66,7 +72,7 @@ public class WeiKeDetailActivity extends BaseActivity<WeiKeDetailPresenter, Comm
         mDataBinding.tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
         startTime = System.currentTimeMillis();
-
+        StatusBarUtil.setStatusTextColor1(true, this);
 
         if (getIntent() != null) {
             id = getIntent().getStringExtra("pid");
@@ -121,6 +127,8 @@ public class WeiKeDetailActivity extends BaseActivity<WeiKeDetailPresenter, Comm
         if (courseInfo != null) {
             currentCourseInfo = courseInfo;
 
+            courseInfo.setWeikePrice(String.format(getString(R.string.category_total_price), courseInfo.getVipPrice()));
+
             mDataBinding.setCourseInfo(courseInfo);
 
             playVideo(courseInfo);
@@ -131,7 +139,7 @@ public class WeiKeDetailActivity extends BaseActivity<WeiKeDetailPresenter, Comm
 
     @Override
     public boolean isStatusBarMateria() {
-        return false;
+        return true;
     }
 
 
@@ -340,8 +348,9 @@ public class WeiKeDetailActivity extends BaseActivity<WeiKeDetailPresenter, Comm
     //显示支付弹窗
 
     private void showBuyDialog() {
-        BasePayFragment basePayFragment = new BasePayFragment();
-        basePayFragment.show(getSupportFragmentManager(), "");
+//        BasePayFragment basePayFragment = new BasePayFragment();
+//        basePayFragment.show(getSupportFragmentManager(), "");
+        startActivity(new Intent(WeiKeDetailActivity.this, PayActivity.class));
     }
 
 

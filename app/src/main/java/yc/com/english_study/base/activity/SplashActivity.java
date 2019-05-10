@@ -16,6 +16,7 @@ import yc.com.base.BaseActivity;
 import yc.com.base.BasePresenter;
 import yc.com.english_study.R;
 import yc.com.english_study.base.constant.Config;
+import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.tencent_adv.AdvDispatchManager;
 import yc.com.tencent_adv.AdvType;
 import yc.com.tencent_adv.OnAdvStateListener;
@@ -38,7 +39,7 @@ public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBi
     @Override
     public void init() {
 //        LogUtil.msg("tag:  " + Build.BRAND);
-        if (TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND)) {
+        if (TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND) || UserInfoHelper.isPhonogramOrPhonicsVip()) {
             mDataBinding.skipView.setVisibility(View.GONE);
             switchMain(Time);
         } else {
@@ -121,7 +122,7 @@ public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBi
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND))) {
+        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND)||UserInfoHelper.isPhonogramOrPhonicsVip())) {
             AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

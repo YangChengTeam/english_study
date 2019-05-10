@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <data>
 
@@ -23,41 +24,41 @@
             app:toolBarTitle="@{`微课学习`}" />
 
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/gray_f1f1f1"
+            android:orientation="vertical">
 
-            <LinearLayout
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/category_tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/gray_f1f1f1"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:tabIndicatorColor="@color/app_selected_color"
+                app:tabIndicatorHeight="@dimen/t2dp"
+                app:tabSelectedTextColor="@color/app_selected_color"
+                app:tabTextAppearance="@style/tabLayoutStyle"
+                app:tabTextColor="@color/black" />
 
-                <yc.com.english_study.base.widget.StateView
-                    android:id="@+id/stateView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_dde4ef" />
 
-                <net.lucode.hackware.magicindicator.MagicIndicator
-                    android:id="@+id/magic_indicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/category_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/category_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="@dimen/t6dp"
-                    android:paddingTop="@dimen/t6dp" />
 
-                <FrameLayout
-                    android:id="@+id/bottom_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </android.support.v4.widget.SwipeRefreshLayout>
+            <FrameLayout
+                android:id="@+id/bottom_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

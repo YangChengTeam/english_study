@@ -23,9 +23,11 @@ import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseView;
 import yc.com.english_study.R;
+import yc.com.english_study.base.activity.MainActivity;
 import yc.com.english_study.base.activity.WebActivity;
 import yc.com.english_study.base.fragment.BasePayFragment;
 import yc.com.english_study.index.fragment.VipEquitiesFragment;
+import yc.com.english_study.mine.activity.PayActivity;
 
 
 public abstract class BaseToolBar extends BaseView {
@@ -98,10 +100,12 @@ public abstract class BaseToolBar extends BaseView {
         RxView.clicks(toolbarIntroduce).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                if (null != clazz && clazz == WebActivity.class) {
-                    MobclickAgent.onEvent(mContext, "book-read-click", "课本点读");
+                if (null != clazz) {
+                    if (clazz == WebActivity.class)
+                        MobclickAgent.onEvent(mContext, "book-read-click", "课本点读");
 
                     Intent intent = new Intent(activity, clazz);
+
                     activity.startActivity(intent);
 
 //                    if (clazz == VipEquitiesActivity.class) {
@@ -121,8 +125,13 @@ public abstract class BaseToolBar extends BaseView {
         RxView.clicks(ivLeftIcon).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                BasePayFragment basePayFragment = new BasePayFragment();
-                basePayFragment.show(mActivity.getSupportFragmentManager(), "");
+//                BasePayFragment basePayFragment = new BasePayFragment();
+//                basePayFragment.show(mActivity.getSupportFragmentManager(), "");
+                Intent intent = new Intent(mContext, MainActivity.class);
+
+                intent.putExtra("position", 3);
+
+                mContext.startActivity(intent);
             }
         });
 

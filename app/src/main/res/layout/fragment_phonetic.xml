@@ -98,7 +98,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/index_vip_equities" />
+                            android:src="@mipmap/index_vip_equities"
+                            android:visibility="gone" />
 
 
                         <TextView
@@ -121,7 +122,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/t15dp"
                         android:layout_marginRight="@dimen/t15dp"
-                        android:layout_marginTop="@dimen/t10dp">
+                        android:layout_marginTop="@dimen/t10dp"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -138,7 +140,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:autoLink="phone"
-                                android:text="@{UserInfoHelper.getContactInfo().tel}"
+                                android:text="@{UserInfoHelper.getContactInfo()!=null?UserInfoHelper.getContactInfo().tel:``}"
                                 android:textColor="@color/app_selected_color"
                                 android:textColorLink="@color/app_selected_color" />
                         </LinearLayout>
@@ -158,7 +160,7 @@
                                 android:id="@+id/tv_service_wechat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{UserInfoHelper.getContactInfo().weixin}"
+                                android:text="@{UserInfoHelper.getContactInfo()!=null?UserInfoHelper.getContactInfo().weixin:``}"
                                 android:textColor="@color/app_selected_color" />
                         </LinearLayout>
                     </RelativeLayout>

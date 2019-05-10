@@ -37,4 +37,15 @@ public class CategoryMainEngine extends BaseEngine {
         return HttpCoreEngin.get(mContext).rxpost(UrlConfig.category_url, new TypeReference<ResultInfo<WeiKeCategoryWrapper>>() {
         }.getType(), params, true, true, true);
     }
+
+
+    public Observable<ResultInfo<WeiKeCategoryWrapper>> getWeiKeList(int page, int page_size, String pid) {
+        Map<String, String> params = new HashMap<>();
+        params.put("page", page + "");
+        params.put("page_size", page_size + "");
+        params.put("type_id", pid);
+
+        return HttpCoreEngin.get(mContext).rxpost(UrlConfig.weike_list_url, new TypeReference<ResultInfo<WeiKeCategoryWrapper>>() {
+        }.getType(), params, true, true, true);
+    }
 }

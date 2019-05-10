@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:english="http://schemas.android.com/apk/res-auto">
+    xmlns:english="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools">
 
 
     <data>
@@ -90,7 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 english:settingIcon="@mipmap/service_wx"
-                english:settingTitle="@string/service_wx" />
+                english:settingTitle="@string/service_wx"
+                app:centerTitle="@{UserInfoHelper.getContactInfo()!=null?UserInfoHelper.getContactInfo().weixin:``}"/>
 
 
         </LinearLayout>

@@ -7,8 +7,11 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 import com.kk.securityhttp.domain.GoagalInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.kk.share.UMShareImpl;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.analytics.game.UMGameAgent;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +20,7 @@ import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import yc.com.blankj.utilcode.util.Utils;
+import yc.com.english_study.base.constant.Config;
 import yc.com.english_study.base.utils.VipInfoHelper;
 import yc.com.english_study.index.utils.UserInfoHelper;
 
@@ -46,6 +50,17 @@ public class EnglishStudyApp extends MultiDexApplication {
         UMGameAgent.init(this);
         UMGameAgent.setPlayerLevel(1);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+        //初始化友盟SDK
+        UMShareAPI.get(this);//初始化sd
+        UMConfigure.init(this, Config.UMENG_KEY, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        //开启debug模式，方便定位错误，具体错误检查方式可以查看
+        //http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
+        UMConfigure.setLogEnabled(Config.DEBUG);
+
+        new UMShareImpl.Builder().setWeixin("wx39c1238171bf9430", "ca1a14b8fa32247f4f5efbafa1b070cc")
+                .build(this);
+
         //全局信息初始化
         GoagalInfo.get().init(getApplicationContext());
         HttpConfig.setPublickey("-----BEGIN PUBLIC KEY-----\n" +
@@ -66,6 +81,9 @@ public class EnglishStudyApp extends MultiDexApplication {
 
         UserInfoHelper.getIndexMenuInfo(this);
         UserInfoHelper.getIndexInfo(this);
+        UserInfoHelper.getPhoneticPages(this);
+        UserInfoHelper.getStudyPages(this);
+
     }
 
     public void setHttpDefaultParams() {

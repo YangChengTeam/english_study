@@ -5,8 +5,12 @@ import android.databinding.ObservableField;
 import android.support.annotation.Nullable;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.vondear.rxtools.RxTimeTool;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by zhangkai on 2017/3/17.
@@ -33,26 +37,20 @@ public class OrderInfo extends BaseObservable implements Serializable {
     private PayInfo payInfo;
 
     private String goodId;
-
+    @JSONField(name = "status")
     private int state;//0未支付 1 已支付
 
     private String time;
 
-    private ObservableField<String> stateDesc = new ObservableField<String>(String.valueOf(state)) {
-        @Nullable
-        @Override
-        public String get() {
-            String desc = "";
-            if (state == 0) {
-                desc = "待支付";
-            } else if (state == 1) {
-                desc = "已支付";
-            }
 
-            return desc;
+    private String goods_title;
 
-        }
-    };
+    private long add_time;
+
+    private long pay_time;
+
+    private String status_text;
+
 
     public OrderInfo() {
     }
@@ -138,5 +136,42 @@ public class OrderInfo extends BaseObservable implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getGoods_title() {
+        return goods_title;
+    }
+
+    public void setGoods_title(String goods_title) {
+        this.goods_title = goods_title;
+    }
+
+
+    public long getAdd_time() {
+        return add_time;
+    }
+
+    public void setAdd_time(long add_time) {
+        this.add_time = add_time;
+    }
+
+    public long getPay_time() {
+        return pay_time;
+    }
+
+    public void setPay_time(long pay_time) {
+        this.pay_time = pay_time;
+    }
+
+    public String getStatus_text() {
+        return status_text;
+    }
+
+    public void setStatus_text(String status_text) {
+        this.status_text = status_text;
+    }
+
+    public String getOrederTime() {
+        return RxTimeTool.date2String(new Date(add_time * 1000), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()));
     }
 }

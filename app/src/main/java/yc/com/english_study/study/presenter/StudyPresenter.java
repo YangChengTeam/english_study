@@ -11,6 +11,7 @@ import yc.com.base.BasePresenter;
 import yc.com.english_study.study.contract.StudyContract;
 import yc.com.english_study.study.model.domain.StudyInfoWrapper;
 import yc.com.english_study.study.model.domain.StudyPages;
+import yc.com.english_study.study.model.domain.StudyPhoneticInfoWrapper;
 import yc.com.english_study.study.model.engine.StudyEngine;
 
 /**
@@ -96,5 +97,59 @@ public class StudyPresenter extends BasePresenter<StudyEngine, StudyContract.Vie
         });
         mSubscriptions.add(subscription);
 
+    }
+
+    @Override
+    public void getPhoneticPages() {
+
+        Subscription subscription = mEngine.getPhoneticPages().subscribe(new Subscriber<ResultInfo<StudyPages>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(ResultInfo<StudyPages> studyPagesResultInfo) {
+                if (studyPagesResultInfo != null && studyPagesResultInfo.code == HttpConfig.STATUS_OK && studyPagesResultInfo.data != null) {
+                    mView.showPhoneticPages(studyPagesResultInfo.data.count);
+                }
+            }
+        });
+        mSubscriptions.add(subscription);
+    }
+
+    @Override
+    public void getPhoneticDetail(int page) {
+        mView.showLoading();
+        Subscription subscription = mEngine.getPhoneticDetail(page).subscribe(new Subscriber<ResultInfo<StudyPhoneticInfoWrapper>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showNoNet();
+            }
+
+            @Override
+            public void onNext(ResultInfo<StudyPhoneticInfoWrapper> studyInfoWrapperResultInfo) {
+                if (studyInfoWrapperResultInfo != null) {
+                    if (studyInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && studyInfoWrapperResultInfo.data != null) {
+                        mView.hide();
+                        mView.showPhoneticInfo(studyInfoWrapperResultInfo.data.getInfo());
+                    } else {
+                        mView.showNoData();
+                    }
+                } else {
+                    mView.showNoNet();
+                }
+            }
+        });
+        mSubscriptions.add(subscription);
     }
 }

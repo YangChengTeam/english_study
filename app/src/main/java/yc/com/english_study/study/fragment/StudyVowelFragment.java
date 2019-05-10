@@ -1,5 +1,7 @@
 package yc.com.english_study.study.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +28,8 @@ import yc.com.english_study.base.fragment.BasePayFragment;
 import yc.com.english_study.category.utils.ItemDecorationHelper;
 import yc.com.english_study.databinding.FragmentStudyVowelBinding;
 import yc.com.english_study.index.utils.UserInfoHelper;
+import yc.com.english_study.mine.activity.PayActivity;
+import yc.com.english_study.mine.fragment.ShareFragment;
 import yc.com.english_study.study.adapter.StudyVowelAdapter;
 import yc.com.english_study.study.contract.StudyVowelContract;
 import yc.com.english_study.study.model.domain.WordInfo;
@@ -38,6 +42,7 @@ public class StudyVowelFragment extends BaseDialogFragment<StudyVowelPresenter, 
 
 
     private List<StudyVowelAdapter> vowelAdapterList;
+    private int type;//1.音标入门 2.外教资深音标
 
 
     @Override
@@ -63,18 +68,18 @@ public class StudyVowelFragment extends BaseDialogFragment<StudyVowelPresenter, 
 
     @Override
     public void init() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            type = bundle.getInt("type", 1);
+        }
+
         mPresenter = new StudyVowelPresenter(getActivity(), this);
 
-//        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-//        vowelRecyclerView.setLayoutManager(layoutManager);
-//        vowelRecyclerView.setHasFixedSize(true);
-//
-//        List<WordInfo> wordInfos = SoundmarkHelper.getWordInfos();
-//        studyVowelAdapter = new StudyVowelAdapter(wordInfos);
-//
-//        vowelRecyclerView.setAdapter(studyVowelAdapter);
-//        vowelRecyclerView.addItemDecoration(new ItemDecorationHelper(getActivity(), 10));
-
+        if (type == 1) {
+            mPresenter.getPhoneticWordInfos();
+        } else if (type == 2) {
+            mPresenter.getVowelInfos();
+        }
 
         initListener();
 
@@ -83,7 +88,6 @@ public class StudyVowelFragment extends BaseDialogFragment<StudyVowelPresenter, 
 
 
     private void initListener() {
-
         RxView.clicks(mDataBinding.ivVowelClose).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -92,11 +96,6 @@ public class StudyVowelFragment extends BaseDialogFragment<StudyVowelPresenter, 
         });
     }
 
-
-    @Override
-    public void showVowelInfoList(List<WordInfo> infoList) {
-
-    }
 
     @Override
     public void shoVowelNewInfos(List<List<WordInfo>> wordInfoList) {
@@ -116,15 +115,30 @@ public class StudyVowelFragment extends BaseDialogFragment<StudyVowelPresenter, 
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         WordInfo wordInfo = studyVowelAdapter.getItem(position);
-                        if (UserInfoHelper.isPhonogramVip() || wordInfo.getIs_vip() == 0) {
-                            if (clickListener != null) {
-                                clickListener.onClick(wordInfo.getPage());
-                                dismiss();
+                        if (type == 1) {
+                            //音标入门
+                            if (UserInfoHelper.isShareSuccess() || UserInfoHelper.isPhonogramOrPhonicsVip() || wordInfo.getIs_vip() == 0) {
+                                if (clickListener != null) {
+                                    clickListener.onClick(wordInfo.getPage());
+                                    dismiss();
+                                }
+                            } else {
+                                ShareFragment shareFragment = new ShareFragment();
+                                shareFragment.show(getChildFragmentManager(), "");
                             }
-                        } else {
-                            BasePayFragment basePayFragment = new BasePayFragment();
-                            basePayFragment.show(getChildFragmentManager(), "");
+
+                        } else if (type == 2) {//资深外教
+                            if (UserInfoHelper.isPhonogramVip() || wordInfo.getIs_vip() == 0) {
+                                if (clickListener != null) {
+                                    clickListener.onClick(wordInfo.getPage());
+                                    dismiss();
+                                }
+                            } else {
+                                getActivity().startActivity(new Intent(getActivity(), PayActivity.class));
+
+                            }
                         }
+
 
                     }
                 });
@@ -162,5 +176,21 @@ public class StudyVowelFragment extends BaseDialogFragment<StudyVowelPresenter, 
                 studyVowelAdapter.notifyDataSetChanged();
             }
         }
+    }
+
+    @Subscribe(
+            thread = EventThread.MAIN_THREAD,
+            tags = {
+                    @Tag(BusAction.SHARE_SUCCESS)
+            }
+    )
+    public void shareSuccess(String info) {
+
+        mPresenter.getPhoneticWordInfos();
+//        if (vowelAdapterList != null) {
+//            for (StudyVowelAdapter studyVowelAdapter : vowelAdapterList) {
+//                studyVowelAdapter.notifyDataSetChanged();
+//            }
+//        }
     }
 }

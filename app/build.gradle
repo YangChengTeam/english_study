@@ -9,8 +9,8 @@ android {
         applicationId "yc.com.english_study"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 5
-        versionName "1.4"
+        versionCode 7
+        versionName "1.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         ndk {
@@ -125,8 +125,8 @@ dependencies {
     //    compile 'hanks.xyz:htextview-library:0.1.2'
     implementation files('libs/jdom-2.0.6.jar')
     //    implementation project(':tencent-adv')
-    compile 'com.wl.tencent-adv:tencent-adv:4.0'
+    compile 'com.wl.tencent-adv:tencent-adv:7.0'
     //    compile 'com.youth.banner:banner:1.4.10'  //最新版本
     implementation project(':banner')
-    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
+    implementation project(':share')
 }

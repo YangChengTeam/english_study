@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
             android:gravity="center_vertical"
+            android:paddingTop="@dimen/status_bar_height"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -167,7 +168,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="@{`微课 ¥` + courseInfo.vipPrice}"
+                                android:text="@{courseInfo.weikePrice}"
                                 android:textColor="@color/red_fb4c30" />
 
                             <TextView
@@ -176,7 +177,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="10dp"
-                                android:text="@{`微课 原价:¥` + courseInfo.MPrice}"
+                                android:text="@{`原价:¥` + courseInfo.MPrice}"
                                 android:textColor="@color/gray_999" />
                         </LinearLayout>
                     </LinearLayout>

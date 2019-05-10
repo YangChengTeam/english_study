@@ -52,6 +52,13 @@ public class BasePhoneFragment extends BaseDialogFragment<BasePhonePresenter, Fr
             }
         });
 
+        RxView.clicks(mDataBinding.ivClose).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                dismiss();
+            }
+        });
+
     }
 
     @Override

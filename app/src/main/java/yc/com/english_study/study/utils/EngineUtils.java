@@ -19,12 +19,14 @@ import rx.Observable;
 import yc.com.english_study.base.constant.UrlConfig;
 import yc.com.english_study.base.model.domain.GoodInfoWrapper;
 import yc.com.english_study.index.model.domain.IndexInfoWrapper;
+import yc.com.english_study.index.model.domain.ShareInfo;
 import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.english_study.pay.HttpUtils;
 import yc.com.english_study.pay.PayListener;
 import yc.com.english_study.pay.XMLUtil;
 import yc.com.english_study.pay.alipay.OrderInfo;
 import yc.com.english_study.pay.alipay.PayInfo;
+import yc.com.english_study.study.model.domain.StudyPages;
 import yc.com.english_study.study_1vs1.model.bean.IndexDialogInfoWrapper;
 
 /**
@@ -192,5 +194,26 @@ public class EngineUtils {
         return HttpCoreEngin.get(context).rxpost(UrlConfig.main_index_url, new TypeReference<ResultInfo<IndexInfoWrapper>>() {
         }.getType(), null, true, true, true);
 
+    }
+
+
+    public static Observable<ResultInfo<StudyPages>> getStudyPages(Context context) {
+
+
+        return HttpCoreEngin.get(context).rxpost(UrlConfig.study_list_url, new TypeReference<ResultInfo<StudyPages>>() {
+        }.getType(), null, true, true, true);
+    }
+
+
+    public static Observable<ResultInfo<StudyPages>> getPhoneticPages(Context context) {
+
+        return HttpCoreEngin.get(context).rxpost(UrlConfig.phonetic_count_url, new TypeReference<ResultInfo<StudyPages>>() {
+        }.getType(), null, true, true, true);
+    }
+
+    public static Observable<ResultInfo<ShareInfo>> getShareInfo(Context context) {
+        return HttpCoreEngin.get(context).rxpost(UrlConfig.share_info_url, new TypeReference<ResultInfo<ShareInfo>>() {
+                }.getType(),
+                null, true, true, true);
     }
 }

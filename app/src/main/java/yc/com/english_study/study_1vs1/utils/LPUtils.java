@@ -23,7 +23,7 @@ public class LPUtils {
         synchronized (LPUtils.class) {
             if (null == mUtilsWeakReference || null == mUtilsWeakReference.get()) {
                 LPUtils utils = new LPUtils();
-                mUtilsWeakReference = new WeakReference<LPUtils>(utils);
+                mUtilsWeakReference = new WeakReference<>(utils);
             }
         }
         return mUtilsWeakReference.get();

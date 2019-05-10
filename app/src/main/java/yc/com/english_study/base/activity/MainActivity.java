@@ -1,6 +1,7 @@
 package yc.com.english_study.base.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -24,9 +25,8 @@ import yc.com.english_study.base.utils.BottomNavigationViewHelper;
 import yc.com.english_study.base.utils.UIUtils;
 import yc.com.english_study.category.fragment.CategoryFragment;
 import yc.com.english_study.databinding.ActivityMainBinding;
-import yc.com.english_study.index.fragment.PhoneticFragment;
 import yc.com.english_study.mine.fragment.MineFragment;
-import yc.com.english_study.study.fragment.StudyFragment;
+import yc.com.english_study.study.fragment.StudyMainFragment;
 import yc.com.english_study.study.utils.AVMediaManager;
 import yc.com.english_study.study_1vs1.fragment.Study1vs1Fragment;
 
@@ -44,9 +44,9 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
     @Override
     public void init() {
 
-        fragments.add(new PhoneticFragment());
-        fragments.add(new StudyFragment());
+        fragments.add(new StudyMainFragment());
         fragments.add(new CategoryFragment());
+        fragments.add(new Study1vs1Fragment());
         fragments.add(new MineFragment());
         initNavigation();
         initViewPager();
@@ -56,6 +56,15 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
 
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent!=null){
+            int position = intent.getIntExtra("position", 0);
+            mDataBinding.viewPager.setCurrentItem(position);
+        }
+    }
 
     /**
      * 初始化viewPager
@@ -102,18 +111,18 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_study:
                     mDataBinding.viewPager.setCurrentItem(0);
                     return true;
-                case R.id.navigation_study:
+                case R.id.navigation_category:
                     mDataBinding.viewPager.setCurrentItem(1);
                     return true;
-                case R.id.navigation_category:
+                case R.id.navigation_discover:
                     mDataBinding.viewPager.setCurrentItem(2);
-                    return true;
-                case R.id.navigation_1vs1:
-                    mDataBinding.viewPager.setCurrentItem(3);
                     MobclickAgent.onEvent(MainActivity.this, "one-to-one-click", "1对1辅导");
+                    return true;
+                case R.id.navigation_mine:
+                    mDataBinding.viewPager.setCurrentItem(3);
                     return true;
 
             }
