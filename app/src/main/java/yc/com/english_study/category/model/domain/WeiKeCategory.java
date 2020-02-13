@@ -1,8 +1,8 @@
 package yc.com.english_study.category.model.domain;
 
-import android.databinding.BaseObservable;
-
 import com.alibaba.fastjson.annotation.JSONField;
+
+import androidx.databinding.BaseObservable;
 
 /**
  * Created by admin on 2017/11/6.

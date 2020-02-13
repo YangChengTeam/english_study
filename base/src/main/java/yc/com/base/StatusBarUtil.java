@@ -5,19 +5,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 
 /**
@@ -744,5 +747,127 @@ public class StatusBarUtil {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    /**
+     * 设置状态栏文字色值为深色调
+     *
+     * @param useDart  是否使用深色调
+     * @param activity
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static void setStatusTextColor1(boolean useDart, Activity activity) {
+        if (isFlyme1()) {
+            //魅族
+            setMeizuStatusBarDarkIcon(activity, useDart);
+        } else if (isMIUI()) {
+            //小米
+            setMIUIStatusTextColor(activity, useDart);
+        } else if (Build.MANUFACTURER.equalsIgnoreCase("OPPO")) {
+            //OPPO
+            setOPPOStatusTextColor(useDart, activity);
+        } else {
+            //其他
+            setOtherStatusTextColor(activity, useDart);
+        }
+    }
+    private static final String KEY_MIUI_VERSION_CODE = "ro.miui.ui.version.code";
+    private static final String KEY_MIUI_VERSION_NAME = "ro.miui.ui.version.name";
+    private static final String KEY_MIUI_INTERNAL_STORAGE = "ro.miui.internal.storage";
+    public static int navigationHeight = 0;
+    /**
+     * 判断手机是否是魅族
+     *
+     * @return
+     */
+    private static boolean isFlyme1() {
+        try {
+            final Method method = Build.class.getMethod("hasSmartBar");
+            return method != null;
+        } catch (final Exception e) {
+            return false;
+        }
+    }
+    /**
+     * 判断手机是否是小米
+     *
+     * @return
+     */
+    public static boolean isMIUI() {
+        try {
+            final BuildProperties prop = BuildProperties.newInstance();
+            return prop.getProperty(KEY_MIUI_VERSION_CODE, null) != null
+                    || prop.getProperty(KEY_MIUI_VERSION_NAME, null) != null
+                    || prop.getProperty(KEY_MIUI_INTERNAL_STORAGE, null) != null;
+        } catch (final IOException e) {
+            return false;
+        }
+    }
+    /**
+     * 小米手机更改状态栏颜色
+     *
+     * @param activity
+     * @param useDart
+     */
+    private static void setMIUIStatusTextColor(Activity activity, boolean useDart) {
+        //6.0后小米状态栏用的原生的
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (useDart) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            } else {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            }
+            activity.getWindow().getDecorView().findViewById(android.R.id.content).setPadding(0, 0, 0, navigationHeight);
+        } else {
+            setMIUIStatusBarDarkIcon(activity, useDart);
+        }
+    }
+
+    /**
+     * 设置OPPO手机状态栏字体为黑色(colorOS3.0,6.0以下部分手机)
+     *
+     * @param lightStatusBar
+     * @param activity
+     */
+    private static final int SYSTEM_UI_FLAG_OP_STATUS_BAR_TINT = 0x00000010;
+
+    private static void setOPPOStatusTextColor(boolean lightStatusBar, Activity activity) {
+        Window window = activity.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        int vis = window.getDecorView().getSystemUiVisibility();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (lightStatusBar) {
+                vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            } else {
+                vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (lightStatusBar) {
+                vis |= SYSTEM_UI_FLAG_OP_STATUS_BAR_TINT;
+            } else {
+                vis &= ~SYSTEM_UI_FLAG_OP_STATUS_BAR_TINT;
+            }
+        }
+        window.getDecorView().setSystemUiVisibility(vis);
+    }
+    /**
+     * 其他手机更改状态栏字体颜色
+     */
+    private static void setOtherStatusTextColor(Activity activity, boolean useDart) {
+        if (useDart) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().getDecorView().setSystemUiVisibility
+                        (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
+        } else {
+            activity.getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        }
+        activity.getWindow().getDecorView().findViewById(android.R.id.content).setPadding
+                (0, 0, 0, navigationHeight);
+
     }
 }

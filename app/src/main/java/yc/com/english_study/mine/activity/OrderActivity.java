@@ -1,9 +1,5 @@
 package yc.com.english_study.mine.activity;
 
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,6 +8,10 @@ import com.kk.utils.ScreenUtil;
 
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import yc.com.base.BaseActivity;
 import yc.com.english_study.R;
 import yc.com.english_study.category.utils.ItemDecorationHelper;

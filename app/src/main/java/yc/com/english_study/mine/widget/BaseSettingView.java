@@ -3,13 +3,14 @@ package yc.com.english_study.mine.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import yc.com.base.BaseView;
 import yc.com.english_study.R;
@@ -24,8 +25,14 @@ public class BaseSettingView extends BaseView {
     TextView tvTitle;
     @BindView(R.id.tv_centet_tile)
     TextView tvCentetTile;
+    @BindView(R.id.iv_arrow)
+    ImageView ivArrow;
+    @BindView(R.id.divider)
+    View divider;
     private String title;
     private Drawable mDrawable;
+    private boolean mShowArrow;
+    private boolean mShowDivider;
 
     public BaseSettingView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -33,10 +40,13 @@ public class BaseSettingView extends BaseView {
         try {
             title = ta.getString(R.styleable.BaseSettingView_settingTitle);
             mDrawable = ta.getDrawable(R.styleable.BaseSettingView_settingIcon);
+            mShowArrow = ta.getBoolean(R.styleable.BaseSettingView_setting_show_arrow, true);
+            mShowDivider = ta.getBoolean(R.styleable.BaseSettingView_setting_show_divider, true);
 
             if (!TextUtils.isEmpty(title)) tvTitle.setText(title);
             if (mDrawable != null) ivIcon.setImageDrawable(mDrawable);
-
+            ivArrow.setVisibility(mShowArrow ? VISIBLE : GONE);
+            divider.setVisibility(mShowDivider ? VISIBLE : GONE);
 
         } finally {
             ta.recycle();

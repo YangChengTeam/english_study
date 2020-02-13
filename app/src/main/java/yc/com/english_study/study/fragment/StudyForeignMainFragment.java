@@ -1,28 +1,28 @@
 package yc.com.english_study.study.fragment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.LogUtil;
 import com.kk.utils.ToastUtil;
+import com.vondear.rxtools.RxPermissionsTool;
 import com.xinqu.videoplayer.XinQuVideoPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.english_study.R;
 import yc.com.english_study.base.constant.SpConstant;
-import yc.com.english_study.base.fragment.BasePayFragment;
-import yc.com.english_study.base.utils.UIUtils;
 import yc.com.english_study.databinding.FragmentStudyBinding;
 import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.english_study.mine.activity.PayActivity;
@@ -55,10 +55,10 @@ public class StudyForeignMainFragment extends BaseFragment<StudyPresenter, Fragm
 
         initListener();
 
-        totalPages = SPUtils.getInstance().getInt(SpConstant.STUDY_PAGES,0);
-        if (totalPages==0){
+        totalPages = SPUtils.getInstance().getInt(SpConstant.STUDY_PAGES, 0);
+        if (totalPages == 0) {
             mPresenter.getStudyPages();
-        }else {
+        } else {
             initViewPager(totalPages);
         }
 
@@ -139,6 +139,22 @@ public class StudyForeignMainFragment extends BaseFragment<StudyPresenter, Fragm
 
     }
 
+    /**
+     * Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,
+     * Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
+     * Manifest.permission.SET_DEBUG_APP,
+     * Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS
+     */
+    private void applyPermission() {
+        RxPermissionsTool.
+                with(getActivity()).
+                addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
+                addPermission(Manifest.permission.RECORD_AUDIO).
+                addPermission(Manifest.permission.ACCESS_COARSE_LOCATION).
+                addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
+                initPermission();
+    }
+
 
     private void next(int pos) {//下一页
 
@@ -185,7 +201,7 @@ public class StudyForeignMainFragment extends BaseFragment<StudyPresenter, Fragm
 
         StudyForeignMainAdapter mainAdapter = new StudyForeignMainAdapter(getChildFragmentManager(), fragments);
         mDataBinding.studyViewPager.setAdapter(mainAdapter);
-        mDataBinding.studyViewPager.setOffscreenPageLimit(data - 1);
+//        mDataBinding.studyViewPager.setOffscreenPageLimit(data - 1);
         mDataBinding.studyViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -283,8 +299,6 @@ public class StudyForeignMainFragment extends BaseFragment<StudyPresenter, Fragm
     @Override
     public void fetchData() {
         super.fetchData();
-//        mPresenter.getStudyPages();
+        applyPermission();
     }
-
-
 }

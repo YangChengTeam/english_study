@@ -1,9 +1,5 @@
 package yc.com.english_study.pay.alipay;
 
-import android.databinding.BaseObservable;
-import android.databinding.ObservableField;
-import android.support.annotation.Nullable;
-
 import com.alibaba.fastjson.annotation.JSONField;
 import com.vondear.rxtools.RxTimeTool;
 
@@ -11,6 +7,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import androidx.databinding.BaseObservable;
 
 /**
  * Created by zhangkai on 2017/3/17.

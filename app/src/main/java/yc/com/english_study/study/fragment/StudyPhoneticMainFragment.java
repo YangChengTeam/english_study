@@ -1,8 +1,6 @@
 package yc.com.english_study.study.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -13,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.blankj.utilcode.util.SPUtils;
@@ -84,7 +84,7 @@ public class StudyPhoneticMainFragment extends BaseFragment<StudyPresenter, Frag
                     }
                 });
 
-                studyVowelFragment.show(getFragmentManager(), "");
+                studyVowelFragment.show(getChildFragmentManager(), "");
             }
         });
 
@@ -168,7 +168,7 @@ public class StudyPhoneticMainFragment extends BaseFragment<StudyPresenter, Frag
 
         StudyForeignMainAdapter mainAdapter = new StudyForeignMainAdapter(getChildFragmentManager(), fragments);
         mDataBinding.studyViewPager.setAdapter(mainAdapter);
-        mDataBinding.studyViewPager.setOffscreenPageLimit(data - 1);
+//        mDataBinding.studyViewPager.setOffscreenPageLimit(data - 1);
         mDataBinding.studyViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

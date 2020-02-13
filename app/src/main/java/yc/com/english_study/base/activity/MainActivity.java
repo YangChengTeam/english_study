@@ -1,31 +1,33 @@
 package yc.com.english_study.base.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.kk.utils.LogUtil;
 import com.umeng.analytics.MobclickAgent;
-import com.vondear.rxtools.RxPermissionsTool;
 import com.xinqu.videoplayer.XinQuVideoPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import yc.com.base.BaseActivity;
 import yc.com.base.BasePresenter;
+import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.english_study.R;
 import yc.com.english_study.base.adapter.MainAdapter;
+import yc.com.english_study.base.constant.SpConstant;
 import yc.com.english_study.base.fragment.ExitFragment;
-import yc.com.english_study.base.utils.BottomNavigationViewHelper;
 import yc.com.english_study.base.utils.UIUtils;
 import yc.com.english_study.category.fragment.CategoryFragment;
 import yc.com.english_study.databinding.ActivityMainBinding;
 import yc.com.english_study.mine.fragment.MineFragment;
+import yc.com.english_study.study.fragment.IndexDialogFragment;
 import yc.com.english_study.study.fragment.StudyMainFragment;
 import yc.com.english_study.study.utils.AVMediaManager;
 import yc.com.english_study.study_1vs1.fragment.Study1vs1Fragment;
@@ -44,15 +46,20 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
     @Override
     public void init() {
 
+
         fragments.add(new StudyMainFragment());
         fragments.add(new CategoryFragment());
         fragments.add(new Study1vs1Fragment());
         fragments.add(new MineFragment());
         initNavigation();
         initViewPager();
-        applyPermission();
+
         UIUtils.getInstance(this).measureBottomBarHeight(mDataBinding.navigation);
 
+        if (!SPUtils.getInstance().getBoolean(SpConstant.INDEX_DIALOG)) {
+            IndexDialogFragment indexDialogFragment = new IndexDialogFragment();
+            indexDialogFragment.show(getSupportFragmentManager(), "");
+        }
 
     }
 
@@ -60,7 +67,7 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (intent!=null){
+        if (intent != null) {
             int position = intent.getIntExtra("position", 0);
             mDataBinding.viewPager.setCurrentItem(position);
         }
@@ -100,35 +107,35 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
 
     private void initNavigation() {
         mDataBinding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        BottomNavigationViewHelper.disableShiftMode(mDataBinding.navigation);
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+//            BottomNavigationViewHelper.disableShiftMode(mDataBinding.navigation);
+//        } else {
+//            mDataBinding.navigation.setLabelVisibilityMode(1);
+//        }
         mDataBinding.navigation.setItemIconTintList(null);
         mDataBinding.navigation.getMenu().getItem(0).setChecked(true);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
+                switch (item.getItemId()) {
+                    case R.id.navigation_study:
+                        mDataBinding.viewPager.setCurrentItem(0);
+                        return true;
+                    case R.id.navigation_category:
+                        mDataBinding.viewPager.setCurrentItem(1);
+                        return true;
+                    case R.id.navigation_discover:
+                        mDataBinding.viewPager.setCurrentItem(2);
+                        MobclickAgent.onEvent(MainActivity.this, "one-to-one-click", "1对1辅导");
+                        return true;
+                    case R.id.navigation_mine:
+                        mDataBinding.viewPager.setCurrentItem(3);
+                        return true;
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_study:
-                    mDataBinding.viewPager.setCurrentItem(0);
-                    return true;
-                case R.id.navigation_category:
-                    mDataBinding.viewPager.setCurrentItem(1);
-                    return true;
-                case R.id.navigation_discover:
-                    mDataBinding.viewPager.setCurrentItem(2);
-                    MobclickAgent.onEvent(MainActivity.this, "one-to-one-click", "1对1辅导");
-                    return true;
-                case R.id.navigation_mine:
-                    mDataBinding.viewPager.setCurrentItem(3);
-                    return true;
-
-            }
-            return false;
-        }
-    };
+                }
+                return false;
+            };
 
 
     @Override
@@ -156,23 +163,6 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
         return true;
     }
 
-
-    /**
-     * Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,
-     * Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
-     * Manifest.permission.SET_DEBUG_APP,
-     * Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS
-     */
-    private void applyPermission() {
-        RxPermissionsTool.
-                with(this).
-                addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
-                addPermission(Manifest.permission.RECORD_AUDIO).
-                addPermission(Manifest.permission.ACCESS_COARSE_LOCATION).
-                addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
-                initPermission();
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -181,8 +171,5 @@ public class MainActivity extends BaseActivity<BasePresenter, ActivityMainBindin
                 LogUtil.msg("TAG: " + permission);
             }
         }
-//        if (!TextUtils.equals("Xiaomi", Build.BOARD)) {
-//            AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        }
     }
 }

@@ -1,21 +1,18 @@
 package yc.com.english_study.index.fragment;
 
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.LogUtil;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.viewpager.widget.ViewPager;
 import rx.functions.Action1;
 import yc.com.base.BaseDialogFragment;
 import yc.com.base.BasePresenter;
-import yc.com.english_study.BR;
 import yc.com.english_study.R;
 import yc.com.english_study.databinding.FragmentGuideBinding;
 

@@ -2,10 +2,6 @@ package yc.com.english_study.category.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -13,6 +9,10 @@ import com.kk.utils.ScreenUtil;
 
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import yc.com.base.BaseFragment;
 import yc.com.english_study.R;
 import yc.com.english_study.category.activity.WeiKeDetailActivity;

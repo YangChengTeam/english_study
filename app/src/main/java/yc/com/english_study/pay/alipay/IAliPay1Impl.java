@@ -3,9 +3,10 @@ package yc.com.english_study.pay.alipay;
 import android.app.Activity;
 import android.text.TextUtils;
 
+
 import com.alipay.sdk.app.PayTask;
 import com.kk.securityhttp.domain.GoagalInfo;
-import com.kk.utils.LogUtil;
+
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

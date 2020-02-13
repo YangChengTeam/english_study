@@ -1,6 +1,5 @@
 package yc.com.english_study.study.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,15 +10,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import yc.com.base.BaseFragment;
 import yc.com.english_study.R;
 import yc.com.english_study.base.presenter.BasePayPresenter;
+import yc.com.english_study.databinding.FragmentStudyApplyBinding;
 import yc.com.english_study.study.adapter.StudyPhraseAdapter;
 import yc.com.english_study.study.listener.OnAVManagerListener;
 import yc.com.english_study.study.listener.OnUIApplyControllerListener;
 import yc.com.english_study.study.model.domain.PhraseInfo;
 import yc.com.english_study.study.utils.AVManager;
-import yc.com.english_study.databinding.FragmentStudyApplyBinding;
 
 /**
  * Created by wanglin  on 2018/10/26 14:14.

@@ -1,7 +1,5 @@
 package yc.com.english_study.index.utils;
 
-import android.databinding.BindingAdapter;
-import android.databinding.BindingMethod;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.webkit.WebView;
@@ -16,6 +14,7 @@ import com.youth.banner.Transformer;
 
 import java.util.List;
 
+import androidx.databinding.BindingAdapter;
 import yc.com.base.BaseActivity;
 import yc.com.english_study.base.widget.BaseToolBar;
 import yc.com.english_study.mine.widget.BaseSettingView;

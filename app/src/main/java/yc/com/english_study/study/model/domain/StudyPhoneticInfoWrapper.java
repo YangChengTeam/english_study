@@ -1,7 +1,5 @@
 package yc.com.english_study.study.model.domain;
 
-import android.databinding.BaseObservable;
-
 /**
  * Created by wanglin  on 2019/4/29 10:44.
  */

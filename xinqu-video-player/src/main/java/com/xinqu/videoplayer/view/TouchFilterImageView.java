@@ -2,11 +2,13 @@ package com.xinqu.videoplayer.view;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 
 /**
@@ -15,7 +17,7 @@ import android.view.MotionEvent;
  * 带有按下效果的ImageView
  */
 
-public class TouchFilterImageView extends android.support.v7.widget.AppCompatImageView {
+public class TouchFilterImageView extends AppCompatImageView {
 
     private static final String TAG = "TouchFilterImageView";
 

@@ -1,13 +1,9 @@
 package yc.com.base;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +14,11 @@ import android.view.WindowManager;
 import com.hwangjr.rxbus.RxBus;
 import com.umeng.analytics.MobclickAgent;
 import com.vondear.rxtools.RxDeviceTool;
-import com.vondear.rxtools.RxLogTool;
 
-import butterknife.ButterKnife;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * Created by wanglin  on 2018/3/6 11:14.
@@ -76,6 +74,7 @@ public abstract class BaseDialogFragment<P extends BasePresenter, VM extends Vie
             WindowManager.LayoutParams layoutParams = window.getAttributes();
             layoutParams.width = (int) (RxDeviceTool.getScreenWidth(getActivity()) * getWidth());
             layoutParams.height = getHeight();
+            layoutParams.gravity = getGravity();
             window.setAttributes(layoutParams);
         }
 
@@ -114,5 +113,9 @@ public abstract class BaseDialogFragment<P extends BasePresenter, VM extends Vie
             mPresenter.unsubscribe();
         RxBus.get().unregister(this);
         Runtime.getRuntime().gc();
+    }
+
+    public int getGravity() {
+        return Gravity.CENTER;
     }
 }

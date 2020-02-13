@@ -1,9 +1,6 @@
 package yc.com.english_study.mine.activity;
 
 import android.content.DialogInterface;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +13,9 @@ import com.kk.utils.ToastUtil;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.english_study.R;
@@ -52,6 +52,8 @@ public class PayActivity extends BaseActivity<BasePayPresenter, FragmentPayBindi
     private boolean isBind;
     private BasePhoneFragment basePhoneFragment;
 
+    private List<GoodInfo> vipInfoList;
+
     @Override
     public boolean isStatusBarMateria() {
         return true;
@@ -66,7 +68,7 @@ public class PayActivity extends BaseActivity<BasePayPresenter, FragmentPayBindi
     public void init() {
 
         mPresenter = new BasePayPresenter(this, this);
-        List<GoodInfo> vipInfoList = VipInfoHelper.getVipInfoList();
+        vipInfoList = VipInfoHelper.getVipInfoList();
         mDataBinding.payInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -134,7 +136,7 @@ public class PayActivity extends BaseActivity<BasePayPresenter, FragmentPayBindi
             @Override
             public void call(Void aVoid) {
                 // todo  支付
-                if (UserInfoHelper.isSuperVip()) {//已购买所有项目
+                if (UserInfoHelper.isPhonogramOrPhonicsVip()) {//已购买所有项目
                     createRewardDialog();
                     return;
                 }
@@ -201,7 +203,9 @@ public class PayActivity extends BaseActivity<BasePayPresenter, FragmentPayBindi
             pos = 1;
         }
         if (UserInfoHelper.isPhonicsVip() && UserInfoHelper.isPhonogramVip() || UserInfoHelper.isPhonogramOrPhonicsVip()) {
-            pos = 3;
+            if (vipInfoList != null) {
+                pos = vipInfoList.size() - 1;
+            }
         }
 
         return pos;
@@ -223,6 +227,7 @@ public class PayActivity extends BaseActivity<BasePayPresenter, FragmentPayBindi
 
     @Override
     public void showVipInfoList(List<GoodInfo> vip_list) {
+        vipInfoList = vip_list;
         currentGoodInfo = getGoodInfo(vip_list);
         payAdapter.setNewData(vip_list);
     }
@@ -231,7 +236,7 @@ public class PayActivity extends BaseActivity<BasePayPresenter, FragmentPayBindi
         GoodInfo goodInfo = null;
         if (goodInfoList != null && goodInfoList.size() > 0) {
             goodInfo = goodInfoList.get(getPosition());
-            if (UserInfoHelper.isSuperVip()) {
+            if (UserInfoHelper.isPhonogramOrPhonicsVip()) {
                 goodInfo = null;
             }
 

@@ -16,14 +16,12 @@ import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.utils.LogUtil;
 import com.xinqu.videoplayer.XinQuVideoPlayer;
 import com.xinqu.videoplayer.XinQuVideoPlayerStandard;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
 
+import androidx.core.content.ContextCompat;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
@@ -32,7 +30,6 @@ import yc.com.blankj.utilcode.util.NetworkUtils;
 import yc.com.blankj.utilcode.util.SizeUtils;
 import yc.com.english_study.R;
 import yc.com.english_study.base.constant.BusAction;
-import yc.com.english_study.base.fragment.BasePayFragment;
 import yc.com.english_study.category.contract.WeiKeDetailContract;
 import yc.com.english_study.category.model.domain.CourseInfo;
 import yc.com.english_study.category.presenter.WeiKeDetailPresenter;
@@ -181,6 +178,8 @@ public class WeiKeDetailActivity extends BaseActivity<WeiKeDetailPresenter, Comm
 
 
     private void initWebView(final CourseInfo data) {
+
+        mDataBinding.webView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
 
         final WebSettings webSettings = mDataBinding.webView.getSettings();
         webSettings.setJavaScriptEnabled(true);

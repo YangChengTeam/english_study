@@ -2,8 +2,6 @@ package yc.com.english_study.study.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import rx.functions.Action1;
 import yc.com.base.BaseDialogFragment;
 import yc.com.english_study.R;
 import yc.com.english_study.base.constant.BusAction;
-import yc.com.english_study.base.fragment.BasePayFragment;
 import yc.com.english_study.category.utils.ItemDecorationHelper;
 import yc.com.english_study.databinding.FragmentStudyVowelBinding;
 import yc.com.english_study.index.utils.UserInfoHelper;

@@ -23,6 +23,7 @@ import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.english_study.mine.activity.OrderActivity;
 import yc.com.english_study.mine.activity.PayActivity;
 import yc.com.english_study.mine.activity.PhoneticActivity;
+import yc.com.english_study.mine.activity.PrivacyStatementActivity;
 import yc.com.english_study.mine.activity.VipEquitiesActivity;
 
 /**
@@ -50,37 +51,22 @@ public class MineFragment extends BaseFragment<BasePresenter, FragmentMineBindin
                 startActivity(new Intent(getActivity(), PayActivity.class));
             }
         });
-        RxView.clicks(mDataBinding.baseSettingViewEquities).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), VipEquitiesActivity.class));
-            }
-        });
+        RxView.clicks(mDataBinding.baseSettingViewEquities).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), VipEquitiesActivity.class)));
 
-        RxView.clicks(mDataBinding.baseSettingViewOrder).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), OrderActivity.class));
-            }
-        });
+        RxView.clicks(mDataBinding.baseSettingViewOrder).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), OrderActivity.class)));
 
-        RxView.clicks(mDataBinding.baseSettingViewShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                ShareFragment shareFragment = new ShareFragment();
-                shareFragment.show(getChildFragmentManager(), "");
+        RxView.clicks(mDataBinding.baseSettingViewShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            ShareFragment shareFragment = new ShareFragment();
+            shareFragment.show(getChildFragmentManager(), "");
+        });
+        RxView.clicks(mDataBinding.baseSettingViewService).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            if (UserInfoHelper.getContactInfo() != null) {
+                cm.setPrimaryClip(ClipData.newPlainText("weixin", UserInfoHelper.getContactInfo().getWeixin()));
+                gotoWeixin();
             }
         });
-        RxView.clicks(mDataBinding.baseSettingViewService).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                if (UserInfoHelper.getContactInfo() != null) {
-                    cm.setPrimaryClip(ClipData.newPlainText("weixin", UserInfoHelper.getContactInfo().getWeixin()));
-                    gotoWeixin();
-                }
-            }
-        });
+        RxView.clicks(mDataBinding.baseSettingViewPrivacy).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), PrivacyStatementActivity.class)));
 
     }
 

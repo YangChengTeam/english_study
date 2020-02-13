@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:english="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:english="http://schemas.android.com/apk/res-auto">
 
 
     <data>
@@ -90,10 +90,25 @@
                 android:id="@+id/baseSettingView_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:centerTitle="@{UserInfoHelper.getContactInfo()!=null?UserInfoHelper.getContactInfo().weixin:``}"
                 english:settingIcon="@mipmap/service_wx"
-                english:settingTitle="@string/service_wx"
-                app:centerTitle="@{UserInfoHelper.getContactInfo()!=null?UserInfoHelper.getContactInfo().weixin:``}"/>
+                english:settingTitle="@string/service_wx" />
 
+            <yc.com.english_study.mine.widget.BaseSettingView
+                android:id="@+id/baseSettingView_privacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                english:settingIcon="@mipmap/seting_privacy"
+                english:settingTitle="@string/privacy_title" />
+
+            <yc.com.english_study.mine.widget.BaseSettingView
+                android:id="@+id/baseSettingView_service_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                english:settingIcon="@mipmap/share_friend"
+                english:settingTitle="在线时间：周一至周五 8:30-18:00 \n                   周六值周日 9:00-12:00"
+                english:setting_show_arrow="false"
+                english:setting_show_divider="false" />
 
         </LinearLayout>
 

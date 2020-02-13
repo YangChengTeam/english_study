@@ -1,11 +1,7 @@
 package yc.com.base;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -14,9 +10,12 @@ import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
 import com.umeng.analytics.MobclickAgent;
-import com.vondear.rxtools.RxLogTool;
 
-import butterknife.ButterKnife;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+
 
 /**
  * Created by wanglin  on 2018/3/6 10:14.
@@ -53,11 +52,12 @@ public abstract class BaseActivity<P extends BasePresenter, VM extends ViewDataB
         //顶部透明
 
 //        overridePendingTransition(R.anim.activity_enter, R.anim.activity_exit);
-        init();
+
 //        setStatusBar();
 
         if (isStatusBarMateria())
             setStatusBarMateria();
+        init();
     }
 
     protected void setStatusBar() {

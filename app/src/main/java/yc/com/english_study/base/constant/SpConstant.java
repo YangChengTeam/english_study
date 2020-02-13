@@ -22,5 +22,7 @@ public class SpConstant {
 
     public static final String CONTACT_INFO = "contact_info";
 
-    public static final String STUDY_PAGES="study_pages";
+    public static final String STUDY_PAGES = "study_pages";
+
+    public static final String INDEX_DIALOG = "index_dialog";
 }

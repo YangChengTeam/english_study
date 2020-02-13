@@ -1,10 +1,9 @@
 package yc.com.english_study.index.utils;
 
-import android.databinding.ViewDataBinding;
-import android.view.ViewGroup;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+
+import androidx.databinding.ViewDataBinding;
 
 
 /**

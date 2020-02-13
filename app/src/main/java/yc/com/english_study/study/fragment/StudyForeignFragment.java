@@ -2,8 +2,6 @@ package yc.com.english_study.study.fragment;
 
 import android.content.Intent;
 import android.graphics.RectF;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.View;
 
@@ -15,6 +13,7 @@ import com.app.hubert.guide.listener.OnLayoutInflatedListener;
 import com.app.hubert.guide.model.GuidePage;
 import com.app.hubert.guide.model.HighLight;
 import com.bumptech.glide.Glide;
+import com.google.android.material.tabs.TabLayout;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.ScreenUtil;
@@ -24,11 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.fragment.app.Fragment;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
-import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.english_study.R;
-import yc.com.english_study.base.constant.SpConstant;
 import yc.com.english_study.base.utils.UIUtils;
 import yc.com.english_study.databinding.StudyMainItemBinding;
 import yc.com.english_study.study.activity.PreviewActivity;
@@ -165,7 +163,8 @@ public class StudyForeignFragment extends BaseFragment<StudyPresenter, StudyMain
                 } else {
                     //todo 播放并录音
                     playStep = 1;
-                    mListener.playAssetFile("guide_01.mp3", playStep);
+
+                    mListener.playAssetFile("guide_01.mp3",false, playStep);
                     if (mStudyInfo != null) {
                         mDataBinding.tvPracticeSoundmark.setVisibility(View.VISIBLE);
                         mDataBinding.tvPracticeSoundmark.setText(mStudyInfo.getName());
@@ -361,7 +360,7 @@ public class StudyForeignFragment extends BaseFragment<StudyPresenter, StudyMain
      * @param studyInfo
      */
     private void playVideo(StudyInfo studyInfo) {
-        Glide.with(this).load(studyInfo.getVideo_cover()).thumbnail(0.1f).into(mDataBinding.videoPlayer.thumbImageView);
+        Glide.with(getActivity()).load(studyInfo.getVideo_cover()).thumbnail(0.1f).into(mDataBinding.videoPlayer.thumbImageView);
 
         mDataBinding.videoPlayer.setUp(studyInfo.getVoice_video(), XinQuVideoPlayer.SCREEN_WINDOW_LIST, false, null == studyInfo.getCn() ? "" : studyInfo.getCn());
     }
@@ -418,7 +417,7 @@ public class StudyForeignFragment extends BaseFragment<StudyPresenter, StudyMain
     public void playPracticeSecondUpdateUI() {
 
         playStep = 3;
-        mListener.playAssetFile("user_tape_tips.mp3", playStep);
+        mListener.playAssetFile("user_tape_tips.mp3",false, playStep);
     }
 
     @Override
@@ -451,7 +450,7 @@ public class StudyForeignFragment extends BaseFragment<StudyPresenter, StudyMain
     @Override
     public void playPracticeThirdUpdateUI() {
         playStep = 1;
-        mListener.playAssetFile("guide_02.mp3", playStep);
+        mListener.playAssetFile("guide_02.mp3",false, playStep);
         mDataBinding.ivTopCarton.setVisibility(View.GONE);
     }
 

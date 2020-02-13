@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -20,15 +20,16 @@
             android:layout_height="1dp"
             android:background="@color/gray_ddd" />
 
-        <android.support.design.widget.BottomNavigationView
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
             android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
             android:background="@color/white"
             app:elevation="0dp"
             app:itemTextColor="@color/main_item_color_selector"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/navigation" />
 
     </LinearLayout>

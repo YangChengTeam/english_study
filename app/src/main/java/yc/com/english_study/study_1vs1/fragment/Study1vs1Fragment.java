@@ -151,7 +151,7 @@ public class Study1vs1Fragment extends BaseFragment<BasePresenter,FragmentStudy1
 
             @Override
             public void onSuccess(OrderInfo orderInfo) {
-                UserInfoHelper.saveVip(Config.SUPER_VIP + "");
+                UserInfoHelper.saveVip(Config.PHONOGRAMORPHONICS_VIP + "");
                 dismissPayDialog();
 
             }

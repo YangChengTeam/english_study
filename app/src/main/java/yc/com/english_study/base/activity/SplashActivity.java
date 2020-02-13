@@ -3,29 +3,34 @@ package yc.com.english_study.base.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.qq.e.ads.nativ.NativeExpressADView;
 
+import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import yc.com.base.BaseActivity;
 import yc.com.base.BasePresenter;
 import yc.com.english_study.R;
 import yc.com.english_study.base.constant.Config;
+import yc.com.english_study.databinding.ActivitySplashBinding;
 import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.tencent_adv.AdvDispatchManager;
+
 import yc.com.tencent_adv.AdvType;
 import yc.com.tencent_adv.OnAdvStateListener;
-import yc.com.english_study.databinding.ActivitySplashBinding;
+import yc.com.toutiao_adv.TTAdDispatchManager;
+import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/10/24 11:17.
  */
-public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBinding> implements OnAdvStateListener {
+public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBinding> implements OnAdvStateListener, yc.com.toutiao_adv.OnAdvStateListener {
 
 
     private Handler mHandler = new Handler();
@@ -39,13 +44,17 @@ public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBi
     @Override
     public void init() {
 //        LogUtil.msg("tag:  " + Build.BRAND);
+
         if (TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND) || UserInfoHelper.isPhonogramOrPhonicsVip()) {
             mDataBinding.skipView.setVisibility(View.GONE);
             switchMain(Time);
         } else {
-            AdvDispatchManager.getManager().init(this, AdvType.SPLASH, mDataBinding.splashContainer, mDataBinding.skipView, Config.TENCENT_ADV_ID, Config.SPLASH_ADV_ID, this);
-        }
+//            AdvDispatchManager.getManager().init(this, AdvType.SPLASH, mDataBinding.splashContainer, mDataBinding.skipView, Config.TENCENT_ADV_ID, Config.SPLASH_ADV_ID, this);
 
+            TTAdDispatchManager.getManager().init(this, TTAdType.SPLASH, mDataBinding.splashContainer, Config.TOUTIAO_SPLASH_ID, 0, null, 0, null, 0, this);
+
+
+        }
 
     }
 
@@ -99,14 +108,16 @@ public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBi
     protected void onResume() {
         super.onResume();
 
-        AdvDispatchManager.getManager().onResume();
+//        AdvDispatchManager.getManager().onResume();
+
+        TTAdDispatchManager.getManager().onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        AdvDispatchManager.getManager().onPause();
-
+//        AdvDispatchManager.getManager().onPause();
+        TTAdDispatchManager.getManager().onStop();
     }
 
     //防止用户返回键退出 APP
@@ -122,8 +133,32 @@ public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBi
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND)||UserInfoHelper.isPhonogramOrPhonicsVip())) {
+        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND))) {
             AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
+
+    @Override
+    public void loadSuccess() {
+        switchMain(0);
+    }
+
+    @Override
+    public void loadFailed() {
+        switchMain(0);
+    }
+
+    @Override
+    public void clickAD() {
+        switchMain(0);
+    }
+
+
+    @Override
+    public void onTTNativeExpressed(List<TTNativeExpressAd> ads) {
+
+    }
+
+
 }

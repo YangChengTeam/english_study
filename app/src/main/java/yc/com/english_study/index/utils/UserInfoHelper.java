@@ -179,23 +179,26 @@ public class UserInfoHelper {
 
     //音标点读
     public static boolean isPhonogramVip() {
-        return isVip(Config.PHONOGRAM_VIP + "") || isPhonogramOrPhonicsVip() || isSuperVip();
+        return isVip(Config.PHONOGRAM_VIP + "") || isPhonogramOrPhonicsVip() ;
+//                || isSuperVip();
     }
 
     //微课
     public static boolean isPhonicsVip() {
-        return isVip(Config.PHONICS_VIP + "") || isPhonogramOrPhonicsVip() || isSuperVip();
+        return isVip(Config.PHONICS_VIP + "") || isPhonogramOrPhonicsVip();
+//        || isSuperVip();
     }
 
     //音标点读+微课
     public static boolean isPhonogramOrPhonicsVip() {
-        return isVip(Config.PHONOGRAMORPHONICS_VIP + "") || isSuperVip() || (isVip(Config.PHONOGRAM_VIP + "") && isVip(Config.PHONICS_VIP + ""));
+        return isVip(Config.PHONOGRAMORPHONICS_VIP + "")  || (isVip(Config.PHONOGRAM_VIP + "") && isVip(Config.PHONICS_VIP + ""));
+//        || isSuperVip()
     }
 
-    //音标点读+微课  超级vip
-    public static boolean isSuperVip() {
-        return isVip(Config.SUPER_VIP + "");
-    }
+//    //音标点读+微课  超级vip
+//    public static boolean isSuperVip() {
+//        return isVip(Config.SUPER_VIP + "");
+//    }
 
 
     public static boolean isShareSuccess() {

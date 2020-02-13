@@ -1,6 +1,5 @@
 package yc.com.english_study.study.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import yc.com.base.BaseFragment;
 import yc.com.base.BasePresenter;
 import yc.com.english_study.R;

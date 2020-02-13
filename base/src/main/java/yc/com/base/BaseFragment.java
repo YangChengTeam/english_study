@@ -1,21 +1,17 @@
 package yc.com.base;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hwangjr.rxbus.RxBus;
-import com.kk.utils.LogUtil;
 import com.umeng.analytics.MobclickAgent;
-import com.vondear.rxtools.RxLogTool;
 
-import butterknife.ButterKnife;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by wanglin  on 2018/3/6 10:52.

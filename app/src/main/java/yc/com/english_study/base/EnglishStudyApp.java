@@ -1,7 +1,6 @@
 package yc.com.english_study.base;
 
 import android.os.Build;
-import android.support.multidex.MultiDexApplication;
 
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
@@ -16,13 +15,14 @@ import com.umeng.socialize.UMShareAPI;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.multidex.MultiDexApplication;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import yc.com.blankj.utilcode.util.Utils;
 import yc.com.english_study.base.constant.Config;
-import yc.com.english_study.base.utils.VipInfoHelper;
 import yc.com.english_study.index.utils.UserInfoHelper;
+import yc.com.toutiao_adv.TTAdManagerHolder;
 
 
 /**
@@ -42,6 +42,8 @@ public class EnglishStudyApp extends MultiDexApplication {
                 SpeechUtility.createUtility(EnglishStudyApp.this, SpeechConstant.APPID + "=5bdacd35");
             }
         });
+        TTAdManagerHolder.buildConfig(this,Config.TOUTIAO_ADV_ID).debug(false);
+        TTAdManagerHolder.init(this, Config.TOUTIAO_ADV_ID);
     }
 
     private void init() {

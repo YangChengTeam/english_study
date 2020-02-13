@@ -1,7 +1,5 @@
 package yc.com.english_study.index.utils;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,9 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 /**
  * Created by wanglin  on 2019/4/20 09:48.

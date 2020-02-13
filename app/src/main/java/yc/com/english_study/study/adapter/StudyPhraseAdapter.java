@@ -1,13 +1,10 @@
 package yc.com.english_study.study.adapter;
 
-import android.databinding.DataBindingUtil;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
-import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
 
