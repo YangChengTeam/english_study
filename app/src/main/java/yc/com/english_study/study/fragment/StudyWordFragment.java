@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import yc.com.base.BaseFragment;
 import yc.com.base.BasePresenter;
 import yc.com.english_study.R;
@@ -25,7 +26,6 @@ import yc.com.english_study.study.utils.AVManager;
  * Created by wanglin  on 2018/10/26 14:14.
  */
 public class StudyWordFragment extends BaseFragment<BasePresenter, FragmentStudyApplyBinding> implements OnUIApplyControllerListener {
-
 
 
     private StudyWordAdapter studyWordAdapter;
@@ -55,11 +55,11 @@ public class StudyWordFragment extends BaseFragment<BasePresenter, FragmentStudy
         if (wordInfos != null && wordInfos.size() > 0) {
             currentInfo = wordInfos.get(0);
         }
-       mDataBinding. recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mDataBinding. recyclerView.setHasFixedSize(true);
+        mDataBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mDataBinding.recyclerView.setHasFixedSize(true);
         mDataBinding.recyclerView.setNestedScrollingEnabled(false);
         studyWordAdapter = new StudyWordAdapter(wordInfos);
-        mDataBinding.  recyclerView.setAdapter(studyWordAdapter);
+        mDataBinding.recyclerView.setAdapter(studyWordAdapter);
 //        ItemDecorationHelper decor = new ItemDecorationHelper(getActivity(), 10, 10);
 //        recyclerView.removeItemDecoration(decor);
 //        if (isFirst) {
@@ -112,12 +112,13 @@ public class StudyWordFragment extends BaseFragment<BasePresenter, FragmentStudy
                         if (mListener.isRecording()) {
                             mListener.stopRecord();
                         } else {
-                            mListener.startRecordAndSynthesis(currentInfo.getWord().replaceAll("#", ""), true);
+                            mListener.startRecordAndSynthesis(currentInfo.getMp3(),currentInfo.getWord().replaceAll("#", "").trim(), true);
                         }
                         break;
-                    case R.id.ll_record_playback:
+                    case R.id.ll_record_playback://回放
+                        if (currentInfo == null) return false;
                         ivRecordPlayback = (ImageView) adapter.getViewByPosition(mDataBinding.recyclerView, position, R.id.iv_record_playback);
-                        mListener.playRecordFile();
+                        mListener.playRecordFile(currentInfo.getMp3());
                         break;
                 }
 
