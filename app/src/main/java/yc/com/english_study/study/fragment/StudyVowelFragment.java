@@ -110,36 +110,33 @@ public class StudyVowelFragment extends BaseDialogFragment<StudyVowelPresenter, 
                 recyclerView.addItemDecoration(new ItemDecorationHelper(getActivity(), 10));
                 vowelAdapterList.add(studyVowelAdapter);
 
-                studyVowelAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        WordInfo wordInfo = studyVowelAdapter.getItem(position);
-                        if (type == 1) {
-                            //音标入门
-                            if (UserInfoHelper.isShareSuccess() || UserInfoHelper.isPhonogramOrPhonicsVip() || wordInfo.getIs_vip() == 0) {
-                                if (clickListener != null) {
-                                    clickListener.onClick(wordInfo.getPage());
-                                    dismiss();
-                                }
-                            } else {
-                                ShareFragment shareFragment = new ShareFragment();
-                                shareFragment.show(getChildFragmentManager(), "");
+                studyVowelAdapter.setOnItemClickListener((adapter, view, position) -> {
+                    WordInfo wordInfo = studyVowelAdapter.getItem(position);
+                    if (type == 1) {
+                        //音标入门
+                        if (UserInfoHelper.isShareSuccess() || UserInfoHelper.isPhonogramOrPhonicsVip() || wordInfo.getIs_vip() == 0) {
+                            if (clickListener != null) {
+                                clickListener.onClick(wordInfo.getPage());
+                                dismiss();
                             }
-
-                        } else if (type == 2) {//资深外教
-                            if (UserInfoHelper.isPhonogramVip() || wordInfo.getIs_vip() == 0) {
-                                if (clickListener != null) {
-                                    clickListener.onClick(wordInfo.getPage());
-                                    dismiss();
-                                }
-                            } else {
-                                getActivity().startActivity(new Intent(getActivity(), PayActivity.class));
-
-                            }
+                        } else {
+                            ShareFragment shareFragment = new ShareFragment();
+                            shareFragment.show(getChildFragmentManager(), "");
                         }
 
+                    } else if (type == 2) {//资深外教
+                        if (UserInfoHelper.isPhonogramVip() || wordInfo.getIs_vip() == 0) {
+                            if (clickListener != null) {
+                                clickListener.onClick(wordInfo.getPage());
+                                dismiss();
+                            }
+                        } else {
+                            getActivity().startActivity(new Intent(getActivity(), PayActivity.class));
 
+                        }
                     }
+
+
                 });
 
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.vowel_header_view, recyclerView, false);

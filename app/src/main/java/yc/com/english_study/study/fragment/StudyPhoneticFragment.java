@@ -44,42 +44,30 @@ public class StudyPhoneticFragment extends BaseFragment<StudyPresenter, StudyPho
 
 
     private void initListener() {
-        RxView.clicks(mDataBinding.ivPhoneticWord).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (mInfo != null) {
-                    manager.playMusic(mInfo.getLetters_mp3());
-                    currentView = mDataBinding.ivPhoneticWord;
-                }
+        RxView.clicks(mDataBinding.ivPhoneticWord).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (mInfo != null) {
+                manager.playMusic(mInfo.getLetters_mp3());
+                currentView = mDataBinding.ivPhoneticWord;
             }
         });
 
-        RxView.clicks(mDataBinding.ivPhoneticPronunciation).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (mInfo != null) {
-                    manager.playMusic(mInfo.getPronunciation_mp3());
-                    currentView = mDataBinding.ivPhoneticPronunciation;
-                }
+        RxView.clicks(mDataBinding.ivPhoneticPronunciation).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (mInfo != null) {
+                manager.playMusic(mInfo.getPronunciation_mp3());
+                currentView = mDataBinding.ivPhoneticPronunciation;
             }
         });
 
-        RxView.clicks(mDataBinding.rlPracticeWordLeft).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (mInfo != null) {
-                    manager.playMusic(mInfo.getWord1_mp3());
-                    currentView = mDataBinding.ivPracticeWordLeft;
-                }
+        RxView.clicks(mDataBinding.rlPracticeWordLeft).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (mInfo != null) {
+                manager.playMusic(mInfo.getWord1_mp3());
+                currentView = mDataBinding.ivPracticeWordLeft;
             }
         });
-        RxView.clicks(mDataBinding.rlPracticeWordRight).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (mInfo != null) {
-                    manager.playMusic(mInfo.getWord2_mp3());
-                    currentView = mDataBinding.ivPracticeWordRight;
-                }
+        RxView.clicks(mDataBinding.rlPracticeWordRight).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (mInfo != null) {
+                manager.playMusic(mInfo.getWord2_mp3());
+                currentView = mDataBinding.ivPracticeWordRight;
             }
         });
     }
@@ -127,12 +115,7 @@ public class StudyPhoneticFragment extends BaseFragment<StudyPresenter, StudyPho
 
     @Override
     public void showNoNet() {
-        mDataBinding.stateView.showNoNet(mDataBinding.nestedScrollView, HttpConfig.NET_ERROR, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.getPhoneticDetail(pos);
-            }
-        });
+        mDataBinding.stateView.showNoNet(mDataBinding.nestedScrollView, HttpConfig.NET_ERROR, v -> mPresenter.getPhoneticDetail(pos));
     }
 
     @Override

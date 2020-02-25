@@ -41,6 +41,7 @@ public class GuideFragment extends BaseDialogFragment<BasePresenter, FragmentGui
 
     private void initListener() {
 
+        int size = images.size();
         mDataBinding.banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -49,7 +50,8 @@ public class GuideFragment extends BaseDialogFragment<BasePresenter, FragmentGui
 
             @Override
             public void onPageSelected(int position) {
-                mDataBinding.ivStartBtn.setVisibility(position == images.size() - 1 ? View.VISIBLE : View.GONE);
+
+                mDataBinding.ivStartBtn.setVisibility(position == size - 1 ? View.VISIBLE : View.GONE);
 //                mDataBinding.banner.setViewPagerIsScroll(position != images.size() - 1);
             }
 
@@ -58,12 +60,7 @@ public class GuideFragment extends BaseDialogFragment<BasePresenter, FragmentGui
 
             }
         });
-        RxView.clicks(mDataBinding.ivStartBtn).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                dismiss();
-            }
-        });
+        RxView.clicks(mDataBinding.ivStartBtn).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> dismiss());
     }
 
     @Override

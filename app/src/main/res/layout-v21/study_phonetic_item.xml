@@ -47,11 +47,11 @@
                     android:paddingRight="@dimen/t12dp"
                     android:paddingTop="@dimen/t15dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_perception_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_perception_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -152,7 +152,7 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -166,11 +166,11 @@
                     android:orientation="vertical"
                     android:padding="@dimen/t15dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_study_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_study_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -384,7 +384,7 @@
                             </androidx.cardview.widget.CardView>
 
                         </LinearLayout>
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -397,11 +397,11 @@
                     android:orientation="vertical"
                     android:padding="@dimen/t15dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_practice_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_practice_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -431,7 +431,7 @@
                             app:imageUrl="@{studyPhoneticInfo.memory}"
                             app:placeHolder="@{0}" />
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
                 </LinearLayout>
 
                 <!--发音要领-->
@@ -446,11 +446,11 @@
                     android:paddingRight="@dimen/t12dp"
                     android:paddingTop="@dimen/t15dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_essentials_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_essentials_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -528,7 +528,7 @@
 
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
                 <!--发音运用-->
@@ -543,11 +543,11 @@
                     android:paddingRight="@dimen/t12dp"
                     android:paddingTop="@dimen/t15dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_apply_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_apply_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -592,7 +592,7 @@
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
                 </LinearLayout>
 
             </LinearLayout>

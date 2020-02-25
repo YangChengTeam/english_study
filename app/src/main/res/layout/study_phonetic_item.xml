@@ -43,117 +43,117 @@
                     android:layout_height="200dp"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/t12dp"
                     android:paddingLeft="@dimen/t12dp"
+                    android:paddingTop="@dimen/t15dp"
                     android:paddingRight="@dimen/t12dp"
-                    android:paddingTop="@dimen/t15dp">
+                    android:paddingBottom="@dimen/t12dp">
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:id="@+id/ll_perception_container"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:orientation="vertical">-->
 
                     <LinearLayout
-                        android:id="@+id/ll_perception_container"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/t3dp"
+                        android:gravity="center_vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <View
+                            android:layout_width="@dimen/t4dp"
+                            android:layout_height="@dimen/t16dp"
+                            android:background="@drawable/study_guide_bg" />
+
+                        <TextView
+                            android:id="@+id/tv_perception"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/t3dp"
-                            android:gravity="center_vertical">
-
-                            <View
-                                android:layout_width="@dimen/t4dp"
-                                android:layout_height="@dimen/t16dp"
-                                android:background="@drawable/study_guide_bg" />
-
-                            <TextView
-                                android:id="@+id/tv_perception"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/t5dp"
-                                android:text="字母在单词中的常见发音"
-                                android:textColor="@color/black_2d2825" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/t10dp"
-                            android:background="@mipmap/phonetic_pronunce_bg"
-                            android:paddingLeft="@dimen/t20dp"
-                            android:paddingRight="@dimen/t20dp"
-                            android:weightSum="5">
-
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="2"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{studyPhoneticInfo.letters}"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/t40sp"
-                                    android:textStyle="bold"
-                                    tools:text="Aa" />
-
-                                <ImageView
-                                    android:id="@+id/iv_phonetic_word"
-                                    android:layout_width="@dimen/t24dp"
-                                    android:layout_height="@dimen/t19dp"
-                                    android:src="@mipmap/big_trumpet" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/t60dp"
-                                    android:text="@{studyPhoneticInfo.fa}"
-                                    android:textSize="@dimen/t16sp"
-                                    tools:text="发" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="2"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <!---->
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{studyPhoneticInfo.pronunciation}"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/t40sp"
-                                    android:textStyle="bold"
-                                    tools:text="/a/" />
-
-                                <ImageView
-                                    android:id="@+id/iv_phonetic_pronunciation"
-                                    android:layout_width="@dimen/t24dp"
-                                    android:layout_height="@dimen/t19dp"
-                                    android:src="@mipmap/big_trumpet" />
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
+                            android:layout_marginLeft="@dimen/t5dp"
+                            android:text="字母在单词中的常见发音"
+                            android:textColor="@color/black_2d2825" />
 
                     </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/t10dp"
+                        android:background="@mipmap/phonetic_pronunce_bg"
+                        android:paddingLeft="@dimen/t20dp"
+                        android:paddingRight="@dimen/t20dp"
+                        android:weightSum="5">
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{studyPhoneticInfo.letters}"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/t40sp"
+                                android:textStyle="bold"
+                                tools:text="Aa" />
+
+                            <ImageView
+                                android:id="@+id/iv_phonetic_word"
+                                android:layout_width="@dimen/t24dp"
+                                android:layout_height="@dimen/t19dp"
+                                android:src="@mipmap/big_trumpet" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/t60dp"
+                                android:text="@{studyPhoneticInfo.fa}"
+                                android:textSize="@dimen/t16sp"
+                                tools:text="发" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <!---->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{studyPhoneticInfo.pronunciation}"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/t40sp"
+                                android:textStyle="bold"
+                                tools:text="/a/" />
+
+                            <ImageView
+                                android:id="@+id/iv_phonetic_pronunciation"
+                                android:layout_width="@dimen/t24dp"
+                                android:layout_height="@dimen/t19dp"
+                                android:src="@mipmap/big_trumpet" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -167,11 +167,11 @@
                     android:orientation="vertical"
                     android:padding="@dimen/t15dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_study_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_study_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -201,10 +201,10 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginBottom="@dimen/t3dp"
                                 android:layout_marginLeft="@dimen/t3dp"
-                                android:layout_marginRight="@dimen/t7dp"
                                 android:layout_marginTop="@dimen/t3dp"
+                                android:layout_marginRight="@dimen/t7dp"
+                                android:layout_marginBottom="@dimen/t3dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/study_essentials_circle_bg"
                                 android:elevation="@dimen/t3dp">
@@ -232,8 +232,8 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="@dimen/t5dp"
-                                        android:layout_marginTop="@dimen/t5dp">
+                                        android:layout_marginTop="@dimen/t5dp"
+                                        android:layout_marginBottom="@dimen/t5dp">
 
                                         <RelativeLayout
                                             android:id="@+id/rl_practice_word_left"
@@ -294,10 +294,10 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginBottom="@dimen/t3dp"
                                 android:layout_marginLeft="@dimen/t7dp"
-                                android:layout_marginRight="@dimen/t3dp"
                                 android:layout_marginTop="@dimen/t3dp"
+                                android:layout_marginRight="@dimen/t3dp"
+                                android:layout_marginBottom="@dimen/t3dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/study_essentials_circle_bg"
                                 android:elevation="@dimen/t3dp">
@@ -326,8 +326,8 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="@dimen/t5dp"
-                                        android:layout_marginTop="@dimen/t5dp">
+                                        android:layout_marginTop="@dimen/t5dp"
+                                        android:layout_marginBottom="@dimen/t5dp">
 
                                         <RelativeLayout
                                             android:id="@+id/rl_practice_word_right"
@@ -387,7 +387,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -400,11 +400,11 @@
                     android:orientation="vertical"
                     android:padding="@dimen/t15dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_practice_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_practice_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -434,7 +434,7 @@
                             app:imageUrl="@{studyPhoneticInfo.memory}"
                             app:placeHolder="@{0}" />
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
                 </LinearLayout>
 
                 <!--发音要领-->
@@ -444,22 +444,22 @@
                     android:layout_marginTop="@dimen/t8dp"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/t12dp"
                     android:paddingLeft="@dimen/t12dp"
+                    android:paddingTop="@dimen/t15dp"
                     android:paddingRight="@dimen/t12dp"
-                    android:paddingTop="@dimen/t15dp">
+                    android:paddingBottom="@dimen/t12dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_essentials_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_essentials_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/t5dp"
                             android:layout_marginLeft="@dimen/t3dp"
+                            android:layout_marginBottom="@dimen/t5dp"
                             android:gravity="center_vertical">
 
                             <View
@@ -530,7 +530,7 @@
 
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
                 <!--发音运用-->
@@ -540,16 +540,16 @@
                     android:layout_marginTop="@dimen/t8dp"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/t12dp"
                     android:paddingLeft="@dimen/t12dp"
+                    android:paddingTop="@dimen/t15dp"
                     android:paddingRight="@dimen/t12dp"
-                    android:paddingTop="@dimen/t15dp">
+                    android:paddingBottom="@dimen/t12dp">
 
-                    <LinearLayout
-                        android:id="@+id/ll_apply_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_apply_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical">-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -593,7 +593,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
                 </LinearLayout>
 
             </LinearLayout>

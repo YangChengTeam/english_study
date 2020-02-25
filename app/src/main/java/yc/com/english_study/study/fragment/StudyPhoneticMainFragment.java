@@ -61,31 +61,25 @@ public class StudyPhoneticMainFragment extends BaseFragment<StudyPresenter, Frag
 
 
     private void initListener() {
-        RxView.clicks(mDataBinding.ivShowVowel).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                StudyVowelFragment studyVowelFragment = new StudyVowelFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("type", 1);
-                studyVowelFragment.setArguments(bundle);
-                studyVowelFragment.setOnClickListener(new StudyVowelFragment.onClickListener() {
-                    @Override
-                    public void onClick(int pos) {
-                        if (pos < totalPages) {
-                            mDataBinding.studyViewPager.setCurrentItem(pos);
-                            currentPos = pos;
-                        }
+        RxView.clicks(mDataBinding.ivShowVowel).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            StudyVowelFragment studyVowelFragment = new StudyVowelFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("type", 1);
+            studyVowelFragment.setArguments(bundle);
+            studyVowelFragment.setOnClickListener(pos -> {
+                if (pos < totalPages) {
+                    mDataBinding.studyViewPager.setCurrentItem(pos);
+                    currentPos = pos;
+                }
 
-                        if (pos == 0) {
-                            mDataBinding.ivPre.setImageResource(R.mipmap.study_pre_normal);
-                        } else if (pos == totalPages - 1) {
-                            mDataBinding.ivNext.setImageResource(R.mipmap.study_next_normal_);
-                        }
-                    }
-                });
+                if (pos == 0) {
+                    mDataBinding.ivPre.setImageResource(R.mipmap.study_pre_normal);
+                } else if (pos == totalPages - 1) {
+                    mDataBinding.ivNext.setImageResource(R.mipmap.study_next_normal_);
+                }
+            });
 
-                studyVowelFragment.show(getChildFragmentManager(), "");
-            }
+            studyVowelFragment.show(getChildFragmentManager(), "");
         });
 
         RxView.clicks(mDataBinding.ivNext).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {

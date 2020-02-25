@@ -1,5 +1,7 @@
 package yc.com.english_study.study.fragment;
 
+import android.app.Activity;
+
 import com.google.android.material.tabs.TabLayout;
 import com.kk.utils.LogUtil;
 import com.qq.e.ads.nativ.NativeExpressADView;
@@ -36,20 +38,25 @@ public class StudyMainFragment extends BaseFragment<BasePresenter, FragmentNewSt
     @Override
     public void init() {
 
-        if (SPUtils.getInstance().getBoolean(SpConstant.IS_SHOW_FIRST, true)) {
+        boolean isShowFirst = SPUtils.getInstance().getBoolean(SpConstant.IS_SHOW_FIRST, true);
+        if (isShowFirst) {
             GuideFragment guideFragment = new GuideFragment();
             guideFragment.show(getChildFragmentManager(), "");
-            SPUtils.getInstance().put(SpConstant.IS_SHOW_FIRST,false);
+            SPUtils.getInstance().put(SpConstant.IS_SHOW_FIRST, false);
         }
 
-        mDataBinding.mainToolbar.init(((BaseActivity) getActivity()), PhoneticActivity.class);
+        Activity ac = getActivity();
+        if (ac instanceof BaseActivity) {
+            BaseActivity baseActivity = (BaseActivity) ac;
+            mDataBinding.mainToolbar.init(baseActivity, PhoneticActivity.class);
+        }
         mDataBinding.mainToolbar.setTvRightTitleAndIcon(getString(R.string.phonetic_introduce), R.mipmap.index_phogetic_introduce);
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new StudyPhoneticMainFragment());
         fragmentList.add(new StudyForeignMainFragment());
 
-        StudyMainAdapter studyMainAdapter = new StudyMainAdapter(getFragmentManager(), getActivity(), fragmentList);
+        StudyMainAdapter studyMainAdapter = new StudyMainAdapter(getFragmentManager(), ac, fragmentList);
         mDataBinding.studyViewPager.setAdapter(studyMainAdapter);
         mDataBinding.studyViewPager.setOffscreenPageLimit(1);
         mDataBinding.studyTabLayout.setupWithViewPager(mDataBinding.studyViewPager);

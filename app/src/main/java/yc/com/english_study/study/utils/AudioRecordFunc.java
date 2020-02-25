@@ -129,7 +129,7 @@ public class AudioRecordFunc {
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
-        while (isRecord == true) {  
+        while (isRecord) {
             readsize = audioRecord.read(audiodata, 0, bufferSizeInBytes);  
             if (AudioRecord.ERROR_INVALID_OPERATION != readsize && fos!=null) {  
                 try {  
