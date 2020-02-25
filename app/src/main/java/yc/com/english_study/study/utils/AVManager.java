@@ -66,6 +66,7 @@ public class AVManager implements OnAVManagerListener {
     private File audioFile;
     private int ret;
     private MediaPlayer mPlayer;//播放录音文件
+    private String mMusicPath;
 
     public AVManager(Context context, OnUIApplyControllerListener onUIControllerListener, String parent) {
         this.mContext = context;
@@ -168,6 +169,7 @@ public class AVManager implements OnAVManagerListener {
 
     @Override
     public void playMusic(String musicUrl, boolean isOnce, int playStep) {
+//        this.mMusicPath = musicUrl;
         stopMusic();
 
         if (TextUtils.isEmpty(musicUrl)) return;
@@ -214,6 +216,7 @@ public class AVManager implements OnAVManagerListener {
     @Override
     public void playMusic(String musicUrl) {
         playMusic(musicUrl, true, 0);
+
     }
 
 
@@ -250,7 +253,7 @@ public class AVManager implements OnAVManagerListener {
 
 
     @Override
-    public void playAssetFile(String assetFilePath,boolean isOnce, final int step) {
+    public void playAssetFile(String assetFilePath, boolean isOnce, final int step) {
 
 
     }
@@ -270,7 +273,8 @@ public class AVManager implements OnAVManagerListener {
     private boolean isWord;
 
     @Override
-    public void startRecordAndSynthesis(String word, boolean isWord) {
+    public void startRecordAndSynthesis(String musicPath,String word, boolean isWord) {
+        this.mMusicPath= musicPath;
         stopMusic();
         this.currentWord = word;
         this.isWord = isWord;
@@ -297,10 +301,10 @@ public class AVManager implements OnAVManagerListener {
 
 
     @Override
-    public void playRecordFile() {
+    public void playRecordFile(String musicPath) {
 
         try {
-            if (audioFile != null && audioFile.exists()) {
+            if (audioFile != null && audioFile.exists() && TextUtils.equals(musicPath, mMusicPath)) {
 
                 stopPlayTape();
                 if (mPlayer == null)
@@ -310,6 +314,7 @@ public class AVManager implements OnAVManagerListener {
                 //设置要播放的文件
                 mPlayer.setDataSource(audioFile.getAbsolutePath());
                 mPlayer.prepare();
+                mPlayer.setVolume(1.0f,1.0f);
                 uiApplyControllerListener.playRecordBeforeUpdateUI();
                 //播放
                 mPlayer.start();
@@ -423,7 +428,7 @@ public class AVManager implements OnAVManagerListener {
         for (String key : mIatResults.keySet()) {
             resultBuffer.append(mIatResults.get(key));
         }
-        String voiceText = resultBuffer.toString();
+        String voiceText = resultBuffer.toString().trim().toLowerCase();
         if (!StringUtils.isEmpty(voiceText)) {
             LogUtils.e("result text --->" + voiceText);
         }

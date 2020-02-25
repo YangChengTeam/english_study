@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import yc.com.base.BaseFragment;
 import yc.com.english_study.R;
 import yc.com.english_study.base.presenter.BasePayPresenter;
@@ -103,12 +104,13 @@ public class StudyPhraseFragment extends BaseFragment<BasePayPresenter, Fragment
                         if (listener.isRecording()) {
                             listener.stopRecord();
                         } else {
-                            listener.startRecordAndSynthesis(currentInfo.getPhrase().replaceAll("#", ""), true);
+                            listener.startRecordAndSynthesis(currentInfo.getMp3(), currentInfo.getPhrase().replaceAll("#", ""), true);
                         }
                         break;
                     case R.id.ll_record_playback:
+                        if (currentInfo == null) return false;
                         ivRecordPlayback = (ImageView) adapter.getViewByPosition(mDataBinding.recyclerView, position, R.id.iv_record_playback);
-                        listener.playRecordFile();
+                        listener.playRecordFile(currentInfo.getMp3());
                         break;
                 }
 

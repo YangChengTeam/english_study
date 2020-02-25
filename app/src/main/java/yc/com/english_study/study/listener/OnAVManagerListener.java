@@ -12,13 +12,13 @@ public interface OnAVManagerListener {
     void stopMusic();
 
 
-    void startRecordAndSynthesis(String word, boolean isWord);
+    void startRecordAndSynthesis(String musicPath,String word, boolean isWord);
 
     void stopRecord();
 
     boolean isRecording();
 
-    void playRecordFile();
+    void playRecordFile(String musicPath);
 
     void playAssetFile(String assetFilePath,boolean isOnce, int step);
 

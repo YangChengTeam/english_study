@@ -107,12 +107,13 @@ public class StudySentenceFragment extends BaseFragment<BasePresenter, FragmentS
                         if (listener.isRecording()) {
                             listener.stopRecord();
                         } else {
-                            listener.startRecordAndSynthesis(currentInfo.getSentence().replaceAll("#", ""), false);
+                            listener.startRecordAndSynthesis(currentInfo.getMp3(),currentInfo.getSentence().replaceAll("#", ""), false);
                         }
                         break;
                     case R.id.ll_record_playback:
+                        if (currentInfo == null) return false;
                         ivRecordPlayback = (ImageView) adapter.getViewByPosition(mDataBinding.recyclerView, position, R.id.iv_record_playback);
-                        listener.playRecordFile();
+                        listener.playRecordFile(currentInfo.getMp3());
                         break;
                 }
 

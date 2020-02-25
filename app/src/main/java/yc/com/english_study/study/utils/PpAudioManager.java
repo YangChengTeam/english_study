@@ -158,7 +158,7 @@ public class PpAudioManager implements OnAVManagerListener {
 
 
     @Override
-    public void startRecordAndSynthesis(String word, boolean isWord) {
+    public void startRecordAndSynthesis(String musicPath, String word, boolean isWord) {
 
     }
 
@@ -174,7 +174,7 @@ public class PpAudioManager implements OnAVManagerListener {
 
 
     @Override
-    public void playRecordFile() {
+    public void playRecordFile(String musicPath) {
         try {
             LogUtil.msg("播放文件路径：" + AudioFileFunc.getWavFilePath());
             playMusic(AudioFileFunc.getWavFilePath(), false, mStep);
@@ -185,8 +185,8 @@ public class PpAudioManager implements OnAVManagerListener {
 
 
     @Override
-    public void playAssetFile(String assetFilePath,boolean isOnce, final int step) {
-        this.mIsOnce= isOnce;
+    public void playAssetFile(String assetFilePath, boolean isOnce, final int step) {
+        this.mIsOnce = isOnce;
         stopMusic();
         mStep = step;
         if (TextUtils.isEmpty(assetFilePath)) return;
@@ -265,7 +265,7 @@ public class PpAudioManager implements OnAVManagerListener {
 
                             mStep += 1;
                             LogUtil.msg("播放用户录音文件--->" + AudioFileFunc.getWavFilePath());
-                            playRecordFile();
+                            playRecordFile("");
 
                         }
                     }
