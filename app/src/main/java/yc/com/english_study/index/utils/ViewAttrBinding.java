@@ -45,7 +45,7 @@ public class ViewAttrBinding {
         if (errorDrawable != 0) {
             request.error(errorDrawable);
         }
-        request.diskCacheStrategy(DiskCacheStrategy.RESULT).skipMemoryCache(false).into(imageView);
+        request.diskCacheStrategy(DiskCacheStrategy.RESULT).skipMemoryCache(false).thumbnail(0.1f).into(imageView);
     }
 
     @BindingAdapter({"app:mediaPath"})

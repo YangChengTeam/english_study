@@ -322,6 +322,9 @@ public class AVManager implements OnAVManagerListener {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         uiApplyControllerListener.playRecordAfterUpdateUI();
+                        if (audioFile!=null){
+                            audioFile.delete();
+                        }
                     }
                 });
                 mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
