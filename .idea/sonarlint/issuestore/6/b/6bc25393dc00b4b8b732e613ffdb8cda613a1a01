@@ -1,0 +1,32 @@
+
+
+java:S1186 "€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(åí›®ÿÿÿÿÿ
+W	java:S125â"<This block of commented-out lines of code should be removed.(ñÌÒŒıÿÿÿÿ
+
+java:S1186ó"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¸ÜÒÄøÿÿÿÿ
+
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¸ÜÒÄøÿÿÿÿ
+
+java:S1186Ô"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(åí›®ÿÿÿÿÿ
+
+java:S1186Ù"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¸ÜÒÄøÿÿÿÿ
+W	java:S125·"<This block of commented-out lines of code should be removed.(òˆåìÿÿÿÿÿ
+k
+java:S1192A"PDefine a constant instead of duplicating this literal "to json error->" 4 times.(…Èêèûÿÿÿÿ
+U
+java:S1118!":Add a private constructor to hide the implicit public one.(ª®İåúÿÿÿÿ
+G
+java:S1128",Remove this unused import 'rx.Subscription'.(¤Ç×»øÿÿÿÿ
+
+java:S1186î"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(åí›®ÿÿÿÿÿ
+
+java:S1186¥"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¸ÜÒÄøÿÿÿÿ
+R	java:S125Ç"<This block of commented-out lines of code should be removed.(¨´Àà
+i
+java:S1128"NRemove this unused import 'yc.com.english_study.index.model.domain.ShareInfo'.(ŒßÛ÷üÿÿÿÿ
+N
+java:S1128
+"8Remove this unused import 'com.kk.utils.PreferenceUtil'.(š†œ´
+W	java:S125½"<This block of commented-out lines of code should be removed.(òˆåìÿÿÿÿÿ
+
+java:S1186‰"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(åí›®ÿÿÿÿÿ

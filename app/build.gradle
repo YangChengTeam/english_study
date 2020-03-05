@@ -9,8 +9,8 @@ android {
         applicationId "yc.com.english_study"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 20
-        versionName "2.9"
+        versionCode 21
+        versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         ndk {
@@ -19,13 +19,9 @@ android {
         flavorDimensions 'default'//这句不能少
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "umeng"]
 
+
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+
 
     signingConfigs {
         debug {
@@ -40,6 +36,15 @@ android {
             keyAlias "english_study"
             keyPassword "123456"
         }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug{}
+
     }
 
     lintOptions {

@@ -1,0 +1,19 @@
+
+V	java:S125o"<This block of commented-out lines of code should be removed.(µáˆÿÿÿÿÿ
+V	java:S125w"<This block of commented-out lines of code should be removed.(†Öíéûÿÿÿÿ
+i	java:S116%"ORename this field "Time" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šë¡úÿÿÿÿ
+–
+java:S1186b"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(İ¦’q
+œ
+java:S1186g"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Û˜ÁÉûÿÿÿÿ
+O
+java:S2387$"4"mHandler" is the name of a field in "BaseActivity".(×»ëØşÿÿÿÿ
+
+java:S1186Ÿ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(õí±Öÿÿÿÿÿ
+—
+java:S1186]"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ŸÖµ¸
+V	java:S125."<This block of commented-out lines of code should be removed.(ĞÏ²ßùÿÿÿÿ
+W	java:S110!"=This class has 10 parents which is greater than 5 authorized.(è¨°¨ûÿÿÿÿ
+C
+java:S1604?"(Make this anonymous inner class a lambda(÷»ÉŸıÿÿÿÿ
+Q	java:S1254"<This block of commented-out lines of code should be removed.(Å™½å
