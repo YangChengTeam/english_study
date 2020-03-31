@@ -19,6 +19,7 @@ import yc.com.english_study.R;
 import yc.com.english_study.base.constant.Config;
 import yc.com.english_study.category.adapter.CategoryPagerAdapter;
 import yc.com.english_study.databinding.FragmentCategoryBinding;
+import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.english_study.mine.activity.PhoneticActivity;
 import yc.com.tencent_adv.OnAdvStateListener;
 import yc.com.toutiao_adv.TTAdDispatchManager;
@@ -46,7 +47,7 @@ public class CategoryFragment extends BaseFragment<BasePresenter, FragmentCatego
         mDataBinding.mainToolbar.init((BaseActivity) getActivity(), PhoneticActivity.class);
         mDataBinding.mainToolbar.setTvRightTitleAndIcon(getString(R.string.phonetic_introduce), R.mipmap.index_phogetic_introduce);
 
-        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND)))
+        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND)|| UserInfoHelper.isPhonogramOrPhonicsVip()))
             TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, mDataBinding.bottomContainer, Config.TOUTIAO_BANNER_ID, 0, null, 0, null, 0, this);
 //            AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, mDataBinding.bottomContainer, null, Config.TENCENT_ADV_ID, Config.BANNER_TOP_ADV_ID, this);
 

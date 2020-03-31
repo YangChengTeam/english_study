@@ -1,0 +1,16 @@
+
+<	java:S131y""Add a default case to this switch.(øå´¡ÿÿÿÿÿ
+œ
+java:S1186W"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø´´øÿÿÿÿ
+œ
+java:S1186a"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™Î«þÿÿÿÿ
+a
+java:S1128"FRemove this unused import 'androidx.recyclerview.widget.RecyclerView'.(Îèòçøÿÿÿÿ
+^	java:S110#"=This class has 10 parents which is greater than 5 authorized.(£ÅÓ£üÿÿÿÿ8ÅÜìÕ‰.
+Q	java:S125n"<This block of commented-out lines of code should be removed.(ïø‚Ç
+H
+java:S1128"2Remove this unused import 'android.view.MenuItem'.(Ð¬Ó‘
+X
+java:S1128"BRemove this unused import 'androidx.core.widget.NestedScrollView'.(ªºÙ‰
+E
+java:S1604”"(Make this anonymous inner class a lambda(¶¼šJ8±©³ï‰.

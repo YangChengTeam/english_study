@@ -164,7 +164,7 @@ public class AVManager implements OnAVManagerListener {
     /**
      * 开始播放音乐
      *
-     * @param musicUrl
+     * @param musicUrl+
      */
 
     @Override
@@ -273,8 +273,8 @@ public class AVManager implements OnAVManagerListener {
     private boolean isWord;
 
     @Override
-    public void startRecordAndSynthesis(String musicPath,String word, boolean isWord) {
-        this.mMusicPath= musicPath;
+    public void startRecordAndSynthesis(String musicPath, String word, boolean isWord) {
+        this.mMusicPath = musicPath;
         stopMusic();
         this.currentWord = word;
         this.isWord = isWord;
@@ -314,7 +314,7 @@ public class AVManager implements OnAVManagerListener {
                 //设置要播放的文件
                 mPlayer.setDataSource(audioFile.getAbsolutePath());
                 mPlayer.prepare();
-                mPlayer.setVolume(1.0f,1.0f);
+                mPlayer.setVolume(1.0f, 1.0f);
                 uiApplyControllerListener.playRecordBeforeUpdateUI();
                 //播放
                 mPlayer.start();
@@ -322,9 +322,11 @@ public class AVManager implements OnAVManagerListener {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         uiApplyControllerListener.playRecordAfterUpdateUI();
+
                         if (audioFile!=null){
                             audioFile.delete();
                         }
+
                     }
                 });
                 mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
