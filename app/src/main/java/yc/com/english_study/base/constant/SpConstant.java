@@ -25,4 +25,9 @@ public class SpConstant {
     public static final String STUDY_PAGES = "study_pages";
 
     public static final String INDEX_DIALOG = "index_dialog";
+
+    public static final String USER_PHONE = "user_phone";
+
+
+    public static final String USER_VIP="english_study_vip";
 }

@@ -15,7 +15,7 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.securityhttp.net.contains.HttpConfig;
+
 import com.xinqu.videoplayer.XinQuVideoPlayer;
 import com.xinqu.videoplayer.XinQuVideoPlayerStandard;
 
@@ -37,6 +37,7 @@ import yc.com.english_study.databinding.CommonActivityWeikeDetailBinding;
 import yc.com.english_study.index.model.domain.UserInfo;
 import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.english_study.mine.activity.PayActivity;
+import yc.com.rthttplibrary.config.HttpConfig;
 
 /**
  * Created by wanglin  on 2017/9/6 08:32.
@@ -99,12 +100,7 @@ public class WeiKeDetailActivity extends BaseActivity<WeiKeDetailPresenter, Comm
 
     @Override
     public void showNoNet() {
-        mDataBinding.stateView.showNoNet(mDataBinding.llRootView, HttpConfig.NET_ERROR, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.getWeikeCategoryInfo(id);
-            }
-        });
+        mDataBinding.stateView.showNoNet(mDataBinding.llRootView, HttpConfig.NET_ERROR, v -> mPresenter.getWeikeCategoryInfo(id));
     }
 
     @Override
@@ -349,7 +345,8 @@ public class WeiKeDetailActivity extends BaseActivity<WeiKeDetailPresenter, Comm
     private void showBuyDialog() {
 //        BasePayFragment basePayFragment = new BasePayFragment();
 //        basePayFragment.show(getSupportFragmentManager(), "");
-        startActivity(new Intent(WeiKeDetailActivity.this, PayActivity.class));
+        if (UserInfoHelper.isLogin(this))
+            startActivity(new Intent(WeiKeDetailActivity.this, PayActivity.class));
     }
 
 

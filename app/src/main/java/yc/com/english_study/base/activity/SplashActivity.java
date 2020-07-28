@@ -45,16 +45,18 @@ public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBi
     public void init() {
 //        LogUtil.msg("tag:  " + Build.BRAND);
 
-        if (TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND) || UserInfoHelper.isPhonogramOrPhonicsVip()) {
-            mDataBinding.skipView.setVisibility(View.GONE);
-            switchMain(Time);
-        } else {
-//            AdvDispatchManager.getManager().init(this, AdvType.SPLASH, mDataBinding.splashContainer, mDataBinding.skipView, Config.TENCENT_ADV_ID, Config.SPLASH_ADV_ID, this);
+        switchMain(Time);
 
-            TTAdDispatchManager.getManager().init(this, TTAdType.SPLASH, mDataBinding.splashContainer, Config.TOUTIAO_SPLASH_ID, 0, null, 0, null, 0, this);
-
-
-        }
+//        if (isAssignPhone() || UserInfoHelper.isPhonogramOrPhonicsVip()) {
+//            mDataBinding.skipView.setVisibility(View.GONE);
+//            switchMain(Time);
+//        } else {
+////            AdvDispatchManager.getManager().init(this, AdvType.SPLASH, mDataBinding.splashContainer, mDataBinding.skipView, Config.TENCENT_ADV_ID, Config.SPLASH_ADV_ID, this);
+//
+//            TTAdDispatchManager.getManager().init(this, TTAdType.SPLASH, mDataBinding.splashContainer, Config.TOUTIAO_SPLASH_ID, 0, null, 0, null, 0, this);
+//
+//
+//        }
 
     }
 
@@ -133,10 +135,15 @@ public class SplashActivity extends BaseActivity<BasePresenter, ActivitySplashBi
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND))) {
+        if (!isAssignPhone()) {
             AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+    }
+
+    //是否是指定机型
+    private boolean isAssignPhone() {
+        return TextUtils.equals("xiaomi", Build.BRAND.toLowerCase()) || TextUtils.equals("huawei", Build.BRAND.toLowerCase()) || TextUtils.equals("honor", Build.BRAND.toLowerCase());
     }
 
     @Override

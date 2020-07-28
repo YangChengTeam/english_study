@@ -1,119 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
-    xmlns:english="http://schemas.android.com/apk/res-auto">
+    xmlns:english="http://schemas.android.com/apk/res-auto"
+    app:ignore="NamespaceTypo">
 
 
     <data>
 
         <import type="yc.com.english_study.index.utils.UserInfoHelper" />
+
+        <import type="android.text.TextUtils" />
     </data>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/mine_top_bg"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <yc.com.english_study.base.widget.MainToolBar
-                android:id="@+id/main_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/t15dp"
-                android:layout_marginTop="@dimen/t8dp"
-                android:gravity="center_vertical">
+                android:background="@mipmap/mine_top_bg"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="@dimen/t55dp"
-                    android:layout_height="@dimen/t55dp"
-                    android:src="@mipmap/default_avtor" />
+                <yc.com.english_study.base.widget.MainToolBar
+                    android:id="@+id/main_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/tv_user_id"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/t10dp"
-                    android:text="@{`用户ID: `+UserInfoHelper.getUid()}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/t18sp" />
+                    android:layout_marginStart="@dimen/t15dp"
+                    android:layout_marginTop="@dimen/t8dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/t55dp"
+                        android:layout_height="@dimen/t55dp"
+                        android:src="@mipmap/default_avtor" />
+
+                    <TextView
+                        android:id="@+id/tv_user_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/t10dp"
+                        android:text="@{TextUtils.isEmpty(UserInfoHelper.getUid())?`登录/注册`:`用户ID: `+UserInfoHelper.getUid()}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t18sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-15dp"
+                android:background="@drawable/mine_content_bg"
+                android:orientation="vertical">
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/t5dp"
+                    english:settingIcon="@mipmap/icon_personal"
+                    english:settingTitle="@string/person_info" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_dredge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    english:settingIcon="@mipmap/icon_member"
+                    english:settingTitle="@string/dredge_vip" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_equities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    english:settingIcon="@mipmap/equities_vip"
+                    english:settingTitle="@string/vip_equities" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    english:settingIcon="@mipmap/my_order"
+                    english:settingTitle="@string/my_order" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_share"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    english:settingIcon="@mipmap/share_friend"
+                    english:settingTitle="@string/share_friend" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:centerTitle="@{UserInfoHelper.getContactInfo()!=null?UserInfoHelper.getContactInfo().weixin:``}"
+                    english:settingIcon="@mipmap/service_wx"
+                    english:settingTitle="@string/service_wx" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    english:settingIcon="@mipmap/icon_set"
+                    english:settingTitle="@string/system_setting" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_privacy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    english:settingIcon="@mipmap/icon_privacy"
+                    english:settingTitle="@string/privacy_title" />
+
+                <yc.com.english_study.mine.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_service_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    english:settingIcon="@mipmap/share_friend"
+                    english:settingTitle="在线时间：周一至周五 8:30-18:00 \n                   周六值周日 9:00-12:00"
+                    english:setting_show_arrow="false"
+                    english:setting_show_divider="false" />
+
             </LinearLayout>
 
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="-15dp"
-            android:background="@drawable/mine_content_bg"
-            android:orientation="vertical">
-
-            <yc.com.english_study.mine.widget.BaseSettingView
-                android:id="@+id/baseSettingView_dredge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/t5dp"
-                english:settingIcon="@mipmap/dredge_vip"
-                english:settingTitle="@string/dredge_vip" />
-
-            <yc.com.english_study.mine.widget.BaseSettingView
-                android:id="@+id/baseSettingView_equities"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                english:settingIcon="@mipmap/equities_vip"
-                english:settingTitle="@string/vip_equities" />
-
-            <yc.com.english_study.mine.widget.BaseSettingView
-                android:id="@+id/baseSettingView_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                english:settingIcon="@mipmap/my_order"
-                english:settingTitle="@string/my_order" />
-
-            <yc.com.english_study.mine.widget.BaseSettingView
-                android:id="@+id/baseSettingView_share"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                english:settingIcon="@mipmap/share_friend"
-                english:settingTitle="@string/share_friend" />
-
-            <yc.com.english_study.mine.widget.BaseSettingView
-                android:id="@+id/baseSettingView_service"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:centerTitle="@{UserInfoHelper.getContactInfo()!=null?UserInfoHelper.getContactInfo().weixin:``}"
-                english:settingIcon="@mipmap/service_wx"
-                english:settingTitle="@string/service_wx" />
-
-            <yc.com.english_study.mine.widget.BaseSettingView
-                android:id="@+id/baseSettingView_privacy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                english:settingIcon="@mipmap/seting_privacy"
-                english:settingTitle="@string/privacy_title" />
-
-            <yc.com.english_study.mine.widget.BaseSettingView
-                android:id="@+id/baseSettingView_service_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                english:settingIcon="@mipmap/share_friend"
-                english:settingTitle="在线时间：周一至周五 8:30-18:00 \n                   周六值周日 9:00-12:00"
-                english:setting_show_arrow="false"
-                english:setting_show_divider="false" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
+    </androidx.core.widget.NestedScrollView>
 </layout>

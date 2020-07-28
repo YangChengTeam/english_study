@@ -1,24 +1,17 @@
 package yc.com.english_study.study.presenter;
 
 import android.content.Context;
-import android.net.LinkAddress;
 import android.text.TextUtils;
-
-import com.kk.securityhttp.domain.ResultInfo;
-import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscriber;
-import rx.Subscription;
 import yc.com.base.BasePresenter;
+import yc.com.english_study.base.observer.BaseCommonObserver;
 import yc.com.english_study.study.contract.StudyVowelContract;
 import yc.com.english_study.study.model.domain.VowelInfoWrapper;
 import yc.com.english_study.study.model.domain.WordInfo;
 import yc.com.english_study.study.model.engine.StudyVowelEngine;
-import yc.com.english_study.study.utils.SoundmarkHelper;
 
 /**
  * Created by wanglin  on 2018/11/1 09:36.
@@ -40,21 +33,11 @@ public class StudyVowelPresenter extends BasePresenter<StudyVowelEngine, StudyVo
 
     public void getVowelInfos() {
 
-        Subscription subscription = mEngine.getVowelInfos().subscribe(new Subscriber<ResultInfo<VowelInfoWrapper>>() {
+        mEngine.getVowelInfos().subscribe(new BaseCommonObserver<VowelInfoWrapper>(mContext) {
             @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-
-            @Override
-            public void onNext(ResultInfo<VowelInfoWrapper> vowelInfoWrapperResultInfo) {
-
-                if (vowelInfoWrapperResultInfo != null && vowelInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && vowelInfoWrapperResultInfo.data != null) {
-                    List<WordInfo> infoList = vowelInfoWrapperResultInfo.data.getList();
+            public void onSuccess(VowelInfoWrapper data, String message) {
+                if (data != null) {
+                    List<WordInfo> infoList = data.getList();
 //                    mView.showVowelInfoList(infoList);
 //                    SoundmarkHelper.setWordInfos(infoList);
                     List<List<WordInfo>> listList = new ArrayList<>();
@@ -62,11 +45,46 @@ public class StudyVowelPresenter extends BasePresenter<StudyVowelEngine, StudyVo
 
 
                 }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+
+            @Override
+            public void onRequestComplete() {
 
             }
         });
 
-        mSubscriptions.add(subscription);
+//        Subscription subscription = mEngine.getVowelInfos().subscribe(new Subscriber<ResultInfo<VowelInfoWrapper>>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//            }
+//
+//            @Override
+//            public void onNext(ResultInfo<VowelInfoWrapper> vowelInfoWrapperResultInfo) {
+//
+//                if (vowelInfoWrapperResultInfo != null && vowelInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && vowelInfoWrapperResultInfo.data != null) {
+//                    List<WordInfo> infoList = vowelInfoWrapperResultInfo.data.getList();
+////                    mView.showVowelInfoList(infoList);
+////                    SoundmarkHelper.setWordInfos(infoList);
+//                    List<List<WordInfo>> listList = new ArrayList<>();
+//                    combinationData(infoList, listList);
+//
+//
+//                }
+//
+//            }
+//        });
+//
+//        mSubscriptions.add(subscription);
     }
 
 
@@ -149,26 +167,27 @@ public class StudyVowelPresenter extends BasePresenter<StudyVowelEngine, StudyVo
 
     @Override
     public void getPhoneticWordInfos() {
-        Subscription subscription = mEngine.getPhoneticWordInfos().subscribe(new Subscriber<ResultInfo<VowelInfoWrapper>>() {
+        mEngine.getPhoneticWordInfos().subscribe(new BaseCommonObserver<VowelInfoWrapper>(mContext) {
             @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(ResultInfo<VowelInfoWrapper> vowelInfoWrapperResultInfo) {
-                if (vowelInfoWrapperResultInfo != null && vowelInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && vowelInfoWrapperResultInfo.data != null) {
-                    List<WordInfo> list = vowelInfoWrapperResultInfo.data.getList();
+            public void onSuccess(VowelInfoWrapper data, String message) {
+                if (data != null) {
+                    List<WordInfo> list = data.getList();
                     List<List<WordInfo>> listList = new ArrayList<>();
                     combinationPhoneticData(list, listList);
                 }
             }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+
+            @Override
+            public void onRequestComplete() {
+
+            }
         });
-        mSubscriptions.add(subscription);
+
+
     }
 }

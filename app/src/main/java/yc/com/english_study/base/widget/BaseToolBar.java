@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.ScreenUtil;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.concurrent.TimeUnit;
@@ -26,6 +25,7 @@ import yc.com.english_study.R;
 import yc.com.english_study.base.activity.MainActivity;
 import yc.com.english_study.base.activity.WebActivity;
 import yc.com.english_study.index.fragment.VipEquitiesFragment;
+import yc.com.rthttplibrary.util.ScreenUtil;
 
 
 public abstract class BaseToolBar extends BaseView {
@@ -248,5 +248,12 @@ public abstract class BaseToolBar extends BaseView {
         toolbarIntroduce.setVisibility(flag ? VISIBLE : GONE);
     }
 
+
+    public void addRightView(View view) {
+        if (view != null) {
+            toolbarIntroduce.removeAllViews();
+            toolbarIntroduce.addView(view);
+        }
+    }
 
 }

@@ -9,8 +9,8 @@ android {
         applicationId "yc.com.english_study"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 21
-        versionName "3.0"
+        versionCode 26
+        versionName "3.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         ndk {
@@ -154,4 +154,6 @@ dependencies {
     // 添加下面的内容
     implementation(name: 'alipaySdk-15.6.5-20190718211159-noUtdid', ext: 'aar')
     implementation project(path: ':toutiao-adv')
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
 }

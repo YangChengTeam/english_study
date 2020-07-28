@@ -15,8 +15,7 @@ import com.app.hubert.guide.model.HighLight;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.utils.ScreenUtil;
+
 import com.xinqu.videoplayer.XinQuVideoPlayer;
 
 import java.util.ArrayList;
@@ -40,6 +39,8 @@ import yc.com.english_study.study.model.domain.StudyPhoneticInfo;
 import yc.com.english_study.study.presenter.StudyPresenter;
 import yc.com.english_study.study.utils.PpAudioManager;
 import yc.com.english_study.study_1vs1.utils.LPUtils;
+import yc.com.rthttplibrary.config.HttpConfig;
+import yc.com.rthttplibrary.util.ScreenUtil;
 
 /**
  * Created by wanglin  on 2018/10/26 16:23.

@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 
 import com.alipay.sdk.app.PayTask;
-import com.kk.securityhttp.domain.GoagalInfo;
+
 
 
 import java.io.UnsupportedEncodingException;
@@ -21,6 +21,7 @@ import java.util.Map;
 
 import yc.com.blankj.utilcode.util.ToastUtils;
 import yc.com.english_study.pay.PayConfig;
+import yc.com.rthttplibrary.config.GoagalInfo;
 
 /**
  * Created by zhangkai on 2017/3/18.

@@ -39,5 +39,7 @@
     <color name="black_2c2826">#2C2826</color>
     <color name="pink_ffc7c6">#FFC7C6</color>
     <color name="orange_984523">#984523</color>
+    <color name="gray_222">#222222</color>
+    <color name="black_222">#222222</color>
 
 </resources>

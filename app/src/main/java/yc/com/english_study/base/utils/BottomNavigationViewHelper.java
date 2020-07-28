@@ -5,9 +5,11 @@ import android.annotation.SuppressLint;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.kk.utils.LogUtil;
+
 
 import java.lang.reflect.Field;
+
+import yc.com.rthttplibrary.util.LogUtil;
 
 /**
  * Created by wanglin  on 2018/10/24 10:37.

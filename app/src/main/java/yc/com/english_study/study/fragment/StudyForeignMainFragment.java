@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.utils.LogUtil;
-import com.kk.utils.ToastUtil;
 import com.vondear.rxtools.RxPermissionsTool;
 import com.xinqu.videoplayer.XinQuVideoPlayer;
 
@@ -32,6 +29,9 @@ import yc.com.english_study.study.model.domain.StudyInfoWrapper;
 import yc.com.english_study.study.model.domain.StudyPhoneticInfo;
 import yc.com.english_study.study.presenter.StudyPresenter;
 import yc.com.english_study.study.utils.AVMediaManager;
+import yc.com.rthttplibrary.config.HttpConfig;
+import yc.com.rthttplibrary.util.LogUtil;
+import yc.com.rthttplibrary.util.ToastUtil;
 
 /**
  * Created by wanglin  on 2018/10/24 17:21.
@@ -112,7 +112,7 @@ public class StudyForeignMainFragment extends BaseFragment<StudyPresenter, Fragm
                     }
                 } else {
                     currentPos--;
-                    ToastUtil.toast2(getActivity(), "已经是最后一页了");
+                    ToastUtil.toast(getActivity(), "已经是最后一页了");
                 }
 
 //                LogUtil.msg("currentPos: next--> " + currentPos);
@@ -130,7 +130,7 @@ public class StudyForeignMainFragment extends BaseFragment<StudyPresenter, Fragm
                     pre(currentPos);
                 } else {
                     mDataBinding.ivPre.setImageResource(R.mipmap.study_pre_normal);
-                    ToastUtil.toast2(getActivity(), "已经是第一页了");
+                    ToastUtil.toast(getActivity(), "已经是第一页了");
                 }
 //                LogUtil.msg("currentPos: pre--> " + currentPos);
             }
@@ -265,7 +265,8 @@ public class StudyForeignMainFragment extends BaseFragment<StudyPresenter, Fragm
     private void showPayDialog() {
 //        BasePayFragment basePayFragment = new BasePayFragment();
 //        basePayFragment.show(getFragmentManager(), "");
-        startActivity(new Intent(getActivity(), PayActivity.class));
+        if (UserInfoHelper.isLogin(getActivity()))
+            startActivity(new Intent(getActivity(), PayActivity.class));
     }
 
     @Override

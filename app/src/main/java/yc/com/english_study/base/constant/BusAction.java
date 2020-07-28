@@ -11,4 +11,7 @@ public class BusAction {
     public static final String PAY_SUCCESS = "pay_success";
 
     public static final String SHARE_SUCCESS="share_success";
+
+
+    public static final String LOGIN ="login_success";
 }

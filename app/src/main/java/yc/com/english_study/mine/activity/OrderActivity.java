@@ -3,8 +3,6 @@ package yc.com.english_study.mine.activity;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.utils.ScreenUtil;
 
 import java.util.List;
 
@@ -20,6 +18,8 @@ import yc.com.english_study.mine.adapter.OrderAdapter;
 import yc.com.english_study.mine.contract.OrderContract;
 import yc.com.english_study.mine.presenter.OrderPresenter;
 import yc.com.english_study.pay.alipay.OrderInfo;
+import yc.com.rthttplibrary.config.HttpConfig;
+import yc.com.rthttplibrary.util.ScreenUtil;
 
 /**
  * Created by wanglin  on 2019/4/25 15:11.
@@ -148,12 +148,7 @@ public class OrderActivity extends BaseActivity<OrderPresenter, ActivityOrderBin
 
     @Override
     public void showNoNet() {
-        mDataBinding.stateView.showNoNet(mDataBinding.rlContainer, HttpConfig.NET_ERROR, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getData(false);
-            }
-        });
+        mDataBinding.stateView.showNoNet(mDataBinding.rlContainer, HttpConfig.NET_ERROR, v -> getData(false));
         if (mDataBinding.swipeRefreshLayout.isRefreshing()) {
             mDataBinding.swipeRefreshLayout.setRefreshing(false);
         }

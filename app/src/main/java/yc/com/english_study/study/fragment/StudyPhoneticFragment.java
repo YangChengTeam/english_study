@@ -1,15 +1,12 @@
 package yc.com.english_study.study.fragment;
 
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.securityhttp.net.contains.HttpConfig;
 
 import java.util.concurrent.TimeUnit;
 
-import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.english_study.R;
 import yc.com.english_study.databinding.StudyPhoneticItemBinding;
@@ -20,6 +17,7 @@ import yc.com.english_study.study.model.domain.StudyInfoWrapper;
 import yc.com.english_study.study.model.domain.StudyPhoneticInfo;
 import yc.com.english_study.study.presenter.StudyPresenter;
 import yc.com.english_study.study.utils.PpAudioManager;
+import yc.com.rthttplibrary.config.HttpConfig;
 
 /**
  * Created by wanglin  on 2019/4/28 14:13.

@@ -2,7 +2,7 @@ package yc.com.english_study.pay;
 
 import android.util.Log;
 
-import com.kk.utils.security.Md5;
+
 
 import org.apache.http.params.CoreConnectionPNames;
 import org.w3c.dom.Document;
@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+
+import yc.com.rthttplibrary.util.Md5;
 
 /**
  * Created by wanglin  on 2018/11/26 15:44.

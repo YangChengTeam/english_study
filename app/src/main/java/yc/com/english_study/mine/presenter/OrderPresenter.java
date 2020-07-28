@@ -2,14 +2,11 @@ package yc.com.english_study.mine.presenter;
 
 import android.content.Context;
 
-import com.kk.securityhttp.domain.ResultInfo;
-import com.kk.securityhttp.net.contains.HttpConfig;
-
 import java.util.List;
 
-import rx.Subscriber;
-import rx.Subscription;
+import io.reactivex.observers.DisposableObserver;
 import yc.com.base.BasePresenter;
+import yc.com.english_study.base.observer.BaseCommonObserver;
 import yc.com.english_study.mine.contract.OrderContract;
 import yc.com.english_study.mine.model.bean.OrderInfoWrapper;
 import yc.com.english_study.mine.model.engine.OrderEngine;
@@ -33,10 +30,10 @@ public class OrderPresenter extends BasePresenter<OrderEngine, OrderContract.Vie
 
     @Override
     public void getOrderInfos() {
-        Subscription subscription = mEngine.getOrderInfos().subscribe(new Subscriber<List<OrderInfo>>() {
+        mEngine.getOrderInfos().subscribe(new DisposableObserver<List<OrderInfo>>() {
             @Override
-            public void onCompleted() {
-
+            public void onNext(List<OrderInfo> orderInfos) {
+                mView.showOrderInfos(orderInfos);
             }
 
             @Override
@@ -45,46 +42,44 @@ public class OrderPresenter extends BasePresenter<OrderEngine, OrderContract.Vie
             }
 
             @Override
-            public void onNext(List<OrderInfo> orderInfos) {
-                mView.showOrderInfos(orderInfos);
+            public void onComplete() {
+
             }
         });
-        mSubscriptions.add(subscription);
+
     }
 
     @Override
     public void getOrderInfoList(final int page, int page_size, boolean isRefresh) {
         if (page == 1 && !isRefresh)
             mView.showLoading();
-        Subscription subscription = mEngine.getOrderInfoList(page, page_size).subscribe(new Subscriber<ResultInfo<OrderInfoWrapper>>() {
+
+        mEngine.getOrderInfoList(page, page_size).subscribe(new BaseCommonObserver<OrderInfoWrapper>(mContext) {
             @Override
-            public void onCompleted() {
+            public void onSuccess(OrderInfoWrapper data, String message) {
+
+                if (data != null && data.getList() != null && data.getList().size() > 0) {
+                    mView.hide();
+                    mView.showOrderInfos(data.getList());
+                } else {
+                    if (page == 1)
+                        mView.showNoData();
+                }
+
 
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onFailure(int code, String errorMsg) {
                 if (page == 1)
                     mView.showNoNet();
             }
 
             @Override
-            public void onNext(ResultInfo<OrderInfoWrapper> infoWrapperResultInfo) {
-                if (infoWrapperResultInfo != null) {
-                    if (infoWrapperResultInfo.code == HttpConfig.STATUS_OK && infoWrapperResultInfo.data != null ) {
-                        mView.hide();
-                        mView.showOrderInfos(infoWrapperResultInfo.data.getList());
-                    } else {
-                        if (page == 1)
-                            mView.showNoData();
-                    }
-                } else {
-                    if (page == 1)
-                        mView.showNoNet();
-                }
+            public void onRequestComplete() {
+
             }
         });
-        mSubscriptions.add(subscription);
     }
 
 

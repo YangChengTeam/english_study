@@ -1,31 +1,34 @@
 package yc.com.english_study.index.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
-import com.kk.securityhttp.domain.GoagalInfo;
-import com.kk.securityhttp.domain.ResultInfo;
-import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.utils.LogUtil;
-import com.kk.utils.PreferenceUtil;
 
 import java.util.List;
 
-import rx.Subscriber;
-import rx.Subscription;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import yc.com.blankj.utilcode.util.LogUtils;
 import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.english_study.base.constant.Config;
 import yc.com.english_study.base.constant.SpConstant;
+import yc.com.english_study.base.httpinterface.HttpRequestInterface;
 import yc.com.english_study.base.model.domain.VipInfo;
+import yc.com.english_study.base.observer.BaseCommonObserver;
 import yc.com.english_study.index.model.domain.ContactInfo;
 import yc.com.english_study.index.model.domain.IndexInfoWrapper;
-import yc.com.english_study.index.model.domain.ShareInfo;
 import yc.com.english_study.index.model.domain.UserInfo;
+import yc.com.english_study.index.model.domain.UserInfoWrapper;
+import yc.com.english_study.mine.activity.LoginActivity;
+import yc.com.english_study.mine.model.engine.LoginEngine;
 import yc.com.english_study.pay.PayWayInfoHelper;
 import yc.com.english_study.study.model.domain.StudyPages;
-import yc.com.english_study.study.utils.EngineUtils;
 import yc.com.english_study.study_1vs1.model.bean.IndexDialogInfoWrapper;
+import yc.com.rthttplibrary.config.GoagalInfo;
+import yc.com.rthttplibrary.request.RetrofitHttpRequest;
+import yc.com.rthttplibrary.util.LogUtil;
 
 /**
  * Created by wanglin  on 2018/10/29 09:38.
@@ -127,17 +130,43 @@ public class UserInfoHelper {
     public static String getUid() {
         String userId = "";
 
-        if (mUserInfo != null) {
-            userId = mUserInfo.getUid();
+        if (getUserInfo() != null) {
+            userId = getUserInfo().getUid();
         }
 
         return userId;
     }
 
+    public static boolean isLogin(Context context) {
+        boolean isLogin = false;
+        if (!TextUtils.isEmpty(getUid())) {
+            isLogin = true;
+
+        }
+
+        if (!isLogin) {
+            Intent intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
+        }
+        return isLogin;
+    }
+
+
+    public static void logout() {
+        UserInfo userInfo = new UserInfo();
+        UserInfoHelper.saveUserInfo(userInfo);
+        List<VipInfo> vipInfos = getVipInfoList();
+        if (vipInfos != null && vipInfos.size() > 0) {
+            vipInfos = null;
+        }
+        setVipInfoList(vipInfos);
+    }
+
 
     public static void saveVip(String vip) {
         boolean flag = false;
-        String vips = SPUtils.getInstance().getString("vip", "");
+
+        String vips = SPUtils.getInstance().getString(SpConstant.USER_VIP, "");
         String[] vipArr = vips.split(",");
         for (String tmp : vipArr) {
             if (tmp.equals(vip)) {
@@ -146,13 +175,13 @@ public class UserInfoHelper {
             }
         }
         if (!flag) {
-            SPUtils.getInstance().put("vip", vips + "," + vip);
+            SPUtils.getInstance().put(SpConstant.USER_VIP, vips + "," + vip);
         }
     }
 
     public static boolean isVip(String vip) {
         boolean flag = false;
-        String vips = SPUtils.getInstance().getString("vip", "");
+        String vips = SPUtils.getInstance().getString(SpConstant.USER_VIP, "");
         String[] vipArr = vips.split(",");
 
         for (String tmp : vipArr) {
@@ -177,9 +206,10 @@ public class UserInfoHelper {
         return flag;
     }
 
+
     //音标点读
     public static boolean isPhonogramVip() {
-        return isVip(Config.PHONOGRAM_VIP + "") || isPhonogramOrPhonicsVip() ;
+        return isVip(Config.PHONOGRAM_VIP + "") || isPhonogramOrPhonicsVip();
 //                || isSuperVip();
     }
 
@@ -191,7 +221,7 @@ public class UserInfoHelper {
 
     //音标点读+微课
     public static boolean isPhonogramOrPhonicsVip() {
-        return isVip(Config.PHONOGRAMORPHONICS_VIP + "")  || (isVip(Config.PHONOGRAM_VIP + "") && isVip(Config.PHONICS_VIP + ""));
+        return isVip(Config.PHONOGRAMORPHONICS_VIP + "") || (isVip(Config.PHONOGRAM_VIP + "") && isVip(Config.PHONICS_VIP + ""));
 //        || isSuperVip()
     }
 
@@ -206,101 +236,187 @@ public class UserInfoHelper {
         return SPUtils.getInstance().getBoolean(GoagalInfo.get().uuid, false);
     }
 
+    private static LoginEngine loginEngine;
+
+    public static void login(Context context) {
+        if (loginEngine == null) {
+            loginEngine = new LoginEngine(context);
+        }
+        UserInfo userInfo = getUserInfo();
+        if (userInfo != null) {
+            String mobile = userInfo.getMobile();
+            String pwd = userInfo.getPwd();
+            if (!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(pwd)) {
+                loginEngine.login(mobile, pwd).subscribe(new BaseCommonObserver<UserInfoWrapper>(context) {
+                    @Override
+                    public void onSuccess(UserInfoWrapper data, String message) {
+
+
+                        if (data != null) {
+                            UserInfo info = data.getUserInfo();
+                            if (info != null) {
+                                info.setPwd(pwd);
+                            }
+                            saveUserInfo(info);
+                            List<VipInfo> vipList = data.getVipList();
+                            setVipInfoList(vipList);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int code, String errorMsg) {
+
+                    }
+
+                    @Override
+                    public void onRequestComplete() {
+
+                    }
+                });
+
+//                loginEngine.login(mobile, pwd).subscribe(new Subscriber<ResultInfo<UserInfoWrapper>>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(ResultInfo<UserInfoWrapper> userInfoWrapperResultInfo) {
+//                        if (userInfoWrapperResultInfo != null) {
+//                            int code = userInfoWrapperResultInfo.code;
+//                            if (code == HttpConfig.STATUS_OK && userInfoWrapperResultInfo.data != null) {
+//                                UserInfo info = userInfoWrapperResultInfo.data.getUserInfo();
+//                                if (info != null) {
+//                                    info.setPwd(pwd);
+//                                }
+//                                saveUserInfo(info);
+//                                List<VipInfo> vipList = userInfoWrapperResultInfo.data.getVipList();
+//                                setVipInfoList(vipList);
+//                            }
+//                        }
+//                    }
+//                });
+            }
+        }
+    }
+
     public static void getIndexMenuInfo(Context context) {
-        EngineUtils.getIndexMenuInfo(context).subscribe(new Subscriber<ResultInfo<IndexDialogInfoWrapper>>() {
-            @Override
-            public void onCompleted() {
 
-            }
+        RetrofitHttpRequest.get(context).create(HttpRequestInterface.class)
+                .getIndexMenuInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCommonObserver<IndexDialogInfoWrapper>(context) {
+                    @Override
+                    public void onSuccess(IndexDialogInfoWrapper data, String message) {
 
-            @Override
-            public void onError(Throwable e) {
-
-
-            }
-
-            @Override
-            public void onNext(ResultInfo<IndexDialogInfoWrapper> indexDialogInfoWrapperResultInfo) {
-
-                if (indexDialogInfoWrapperResultInfo != null && indexDialogInfoWrapperResultInfo.code == HttpConfig.STATUS_OK) {
 //                    mView.hideStateView();
-                    IndexDialogInfoWrapper infoWrapper = indexDialogInfoWrapperResultInfo.data;
-                    SPUtils.getInstance().put(SpConstant.INDEX_MENU_STATICS, JSON.toJSONString(infoWrapper.info));
-                }
-            }
-        });
+                        SPUtils.getInstance().put(SpConstant.INDEX_MENU_STATICS, JSON.toJSONString(data.info));
+
+                    }
+
+                    @Override
+                    public void onFailure(int code, String errorMsg) {
+
+                    }
+
+                    @Override
+                    public void onRequestComplete() {
+
+                    }
+                });
 
     }
 
     public static void getIndexInfo(Context context) {
-        EngineUtils.getIndexInfo(context).subscribe(new Subscriber<ResultInfo<IndexInfoWrapper>>() {
-            @Override
-            public void onCompleted() {
+        RetrofitHttpRequest.get(context).create(HttpRequestInterface.class)
+                .getIndexInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCommonObserver<IndexInfoWrapper>(context) {
+                    @Override
+                    public void onSuccess(IndexInfoWrapper infoWrapper, String message) {
+                        if (infoWrapper != null) {
+//                            IndexInfoWrapper infoWrapper = infoWrapperResultInfo.data;
+//                    UserInfoHelper.saveUserInfo(infoWrapper.getUserInfo());
+                            UserInfoHelper.setVipInfoList(infoWrapper.getUser_vip_list());
+                            ShareInfoHelper.saveShareInfo(infoWrapper.getShare_info());
+                            PayWayInfoHelper.setPayWayInfoList(infoWrapper.getPayway_list());
+                            setContactInfo(infoWrapper.getContact_info());
+                        }
+                    }
 
-            }
+                    @Override
+                    public void onFailure(int code, String errorMsg) {
 
-            @Override
-            public void onError(Throwable e) {
+                    }
 
-            }
+                    @Override
+                    public void onRequestComplete() {
 
-            @Override
-            public void onNext(ResultInfo<IndexInfoWrapper> infoWrapperResultInfo) {
-                if (infoWrapperResultInfo != null && infoWrapperResultInfo.code == HttpConfig.STATUS_OK && infoWrapperResultInfo.data != null) {
-                    IndexInfoWrapper infoWrapper = infoWrapperResultInfo.data;
-                    UserInfoHelper.saveUserInfo(infoWrapper.getUserInfo());
-                    UserInfoHelper.setVipInfoList(infoWrapper.getUser_vip_list());
-                    ShareInfoHelper.saveShareInfo(infoWrapper.getShare_info());
-                    PayWayInfoHelper.setPayWayInfoList(infoWrapper.getPayway_list());
-                    setContactInfo(infoWrapperResultInfo.data.getContact_info());
-                }
-            }
-        });
+                    }
+                });
+
     }
 
     public static void getPhoneticPages(Context context) {
 
-        EngineUtils.getPhoneticPages(context).subscribe(new Subscriber<ResultInfo<StudyPages>>() {
-            @Override
-            public void onCompleted() {
+        RetrofitHttpRequest.get(context).create(HttpRequestInterface.class)
+                .getPhoneticPages()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCommonObserver<StudyPages>(context) {
+                    @Override
+                    public void onSuccess(StudyPages data, String message) {
+                        if (data != null) {
+                            SPUtils.getInstance().put(SpConstant.PHONETIC_PAGES, data.count);
+                        }
+                    }
 
-            }
+                    @Override
+                    public void onFailure(int code, String errorMsg) {
 
-            @Override
-            public void onError(Throwable e) {
+                    }
 
-            }
+                    @Override
+                    public void onRequestComplete() {
 
-            @Override
-            public void onNext(ResultInfo<StudyPages> stringResultInfo) {
-                if (stringResultInfo != null && stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
-                    SPUtils.getInstance().put(SpConstant.PHONETIC_PAGES, stringResultInfo.data.count);
-                }
-
-            }
-        });
+                    }
+                });
 
     }
 
     public static void getStudyPages(Context context) {
-        EngineUtils.getStudyPages(context).subscribe(new Subscriber<ResultInfo<StudyPages>>() {
-            @Override
-            public void onCompleted() {
 
-            }
 
-            @Override
-            public void onError(Throwable e) {
+        RetrofitHttpRequest.get(context).create(HttpRequestInterface.class)
+                .getStudyPages()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCommonObserver<StudyPages>(context) {
+                    @Override
+                    public void onSuccess(StudyPages data, String message) {
+                        if (data != null) {
+                            SPUtils.getInstance().put(SpConstant.STUDY_PAGES, data.count);
+                        }
+                    }
 
-            }
+                    @Override
+                    public void onFailure(int code, String errorMsg) {
 
-            @Override
-            public void onNext(ResultInfo<StudyPages> studyPagesResultInfo) {
-                if (studyPagesResultInfo != null && studyPagesResultInfo.code == HttpConfig.STATUS_OK && studyPagesResultInfo.data != null) {
-                    SPUtils.getInstance().put(SpConstant.STUDY_PAGES, studyPagesResultInfo.data.count);
-                }
-            }
-        });
+                    }
+
+                    @Override
+                    public void onRequestComplete() {
+
+                    }
+                });
     }
 
 

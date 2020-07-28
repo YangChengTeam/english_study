@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.ToastUtil;
+
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.concurrent.TimeUnit;
@@ -22,6 +22,7 @@ import yc.com.english_study.base.constant.SpConstant;
 import yc.com.english_study.databinding.FragmentPhoneticBinding;
 import yc.com.english_study.index.fragment.GuideFragment;
 import yc.com.english_study.index.fragment.VipEquitiesFragment;
+import yc.com.rthttplibrary.util.ToastUtil;
 
 /**
  * Created by wanglin  on 2018/10/24 17:21.
@@ -66,7 +67,7 @@ public class PhoneticActivity extends BaseActivity<BasePresenter, FragmentPhonet
     private void gotoWeixin() {
 
         try {
-            ToastUtil.toast2(this, "复制成功，正在前往微信");
+            ToastUtil.toast(this, "复制成功，正在前往微信");
             Intent intent = new Intent(Intent.ACTION_MAIN);
             ComponentName cmp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI");
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -75,7 +76,7 @@ public class PhoneticActivity extends BaseActivity<BasePresenter, FragmentPhonet
             startActivity(intent);
 
         } catch (ActivityNotFoundException e) {
-            ToastUtil.toast2(this, "检查到您手机没有安装微信，请安装后使用该功能");
+            ToastUtil.toast(this, "检查到您手机没有安装微信，请安装后使用该功能");
         }
 
     }

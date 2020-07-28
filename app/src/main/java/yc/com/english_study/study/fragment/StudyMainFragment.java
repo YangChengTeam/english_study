@@ -3,7 +3,7 @@ package yc.com.english_study.study.fragment;
 import android.app.Activity;
 
 import com.google.android.material.tabs.TabLayout;
-import com.kk.utils.LogUtil;
+
 import com.qq.e.ads.nativ.NativeExpressADView;
 
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ import yc.com.english_study.databinding.FragmentNewStudyBinding;
 import yc.com.english_study.index.fragment.GuideFragment;
 import yc.com.english_study.mine.activity.PhoneticActivity;
 import yc.com.english_study.study.adapter.StudyMainAdapter;
+import yc.com.rthttplibrary.util.LogUtil;
 import yc.com.tencent_adv.OnAdvStateListener;
 
 /**

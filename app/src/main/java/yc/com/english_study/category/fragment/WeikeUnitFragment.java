@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.kk.utils.ScreenUtil;
+
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ import yc.com.english_study.category.model.domain.WeiKeCategory;
 import yc.com.english_study.category.presenter.CategoryMainPresenter;
 import yc.com.english_study.category.utils.ItemDecorationHelper;
 import yc.com.english_study.databinding.FragmentWeikeUnitBinding;
+import yc.com.rthttplibrary.util.ScreenUtil;
 
 /**
  * 微课单元列表
@@ -84,7 +87,7 @@ public class WeikeUnitFragment extends BaseFragment<CategoryMainPresenter, Fragm
 
         mDataBinding.categoryRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 View view = mDataBinding.categoryRecyclerView.getChildAt(0);
                 if (view.getTop() < 0) {

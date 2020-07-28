@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.share.UMShareImpl;
-import com.kk.utils.LogUtil;
-import com.kk.utils.ToastUtil;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
@@ -18,13 +16,14 @@ import java.util.concurrent.TimeUnit;
 
 import rx.functions.Action1;
 import yc.com.base.BaseDialogFragment;
-import yc.com.base.BasePresenter;
 import yc.com.english_study.R;
 import yc.com.english_study.databinding.FragmentShareBinding;
 import yc.com.english_study.index.model.domain.ShareInfo;
 import yc.com.english_study.index.utils.ShareInfoHelper;
 import yc.com.english_study.mine.contract.ShareContract;
 import yc.com.english_study.mine.presenter.SharePresenter;
+import yc.com.rthttplibrary.util.LogUtil;
+import yc.com.rthttplibrary.util.ToastUtil;
 
 /**
  * Created by wanglin  on 2019/4/28 09:12.
@@ -91,7 +90,7 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter, FragmentSh
         @Override
         public void onResult(SHARE_MEDIA share_media) {
             loadingView.dismiss();
-            ToastUtil.toast2(mContext, "发送成功");
+            ToastUtil.toast(mContext, "发送成功");
             //            RxSPTool.putBoolean(mContext, SpConstant.SHARE_SUCCESS, true);
 
             if (mShareInfo == null)
@@ -104,13 +103,13 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter, FragmentSh
         @Override
         public void onError(SHARE_MEDIA share_media, Throwable throwable) {
             loadingView.dismiss();
-            ToastUtil.toast2(mContext, "分享有误");
+            ToastUtil.toast(mContext, "分享有误");
         }
 
         @Override
         public void onCancel(SHARE_MEDIA share_media) {
             loadingView.dismiss();
-            ToastUtil.toast2(mContext, "取消发送");
+            ToastUtil.toast(mContext, "取消发送");
         }
     };
 

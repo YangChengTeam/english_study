@@ -1,15 +1,13 @@
 package yc.com.english_study.mine.activity;
 
-import android.os.Bundle;
-
-
+import yc.com.base.BaseActivity;
 import yc.com.base.BasePresenter;
 import yc.com.english_study.R;
-import yc.com.base.BaseActivity;
+import yc.com.english_study.base.EnglishStudyApp;
+import yc.com.english_study.base.utils.AssetsyUtil;
 import yc.com.english_study.databinding.ActivityPrivacyStatementBinding;
 
 public class PrivacyStatementActivity extends BaseActivity<BasePresenter, ActivityPrivacyStatementBinding> {
-
 
 
     @Override
@@ -29,5 +27,6 @@ public class PrivacyStatementActivity extends BaseActivity<BasePresenter, Activi
         mDataBinding.mainToolbar.setTitle("隐私声明");
         mDataBinding.mainToolbar.init(this);
         mDataBinding.mainToolbar.setRightContainerVisible(false);
+        mDataBinding.tvPrivacy.setText(EnglishStudyApp.privacyPolicy);
     }
 }

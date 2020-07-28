@@ -15,8 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.kk.utils.ToastUtil;
-import com.kk.utils.security.Md5;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,6 +35,8 @@ import yc.com.blankj.utilcode.util.PathUtils;
 import yc.com.blankj.utilcode.util.TimeUtils;
 import yc.com.blankj.utilcode.util.ToastUtils;
 import yc.com.english_study.R;
+import yc.com.rthttplibrary.util.Md5;
+import yc.com.rthttplibrary.util.ToastUtil;
 
 /**
  * Created by wanglin  on 2017/9/6 15:15.
@@ -139,7 +140,7 @@ public class MediaPlayerView extends LinearLayout implements MediaPlayer.OnPrepa
             return;
         }
         if (currentState == STATE_INITIALIZE) {
-            ToastUtil.toast2(mContext, "正在缓冲中，请稍候...");
+            ToastUtil.toast(mContext, "正在缓冲中，请稍候...");
             return;
         }
         try {

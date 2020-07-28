@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.RxBus;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.ScreenUtil;
-import com.kk.utils.ToastUtil;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +34,8 @@ import yc.com.english_study.pay.alipay.IAliPay1Impl;
 import yc.com.english_study.pay.alipay.IPayCallback;
 import yc.com.english_study.pay.alipay.IWXPay1Impl;
 import yc.com.english_study.pay.alipay.OrderInfo;
+import yc.com.rthttplibrary.util.ScreenUtil;
+import yc.com.rthttplibrary.util.ToastUtil;
 
 /**
  * Created by wanglin  on 2018/10/29 17:18.
@@ -170,7 +170,7 @@ public class BasePayFragment extends BaseDialogFragment<BasePayPresenter, Fragme
                     mPresenter.createOrder(1, payway, currentGoodInfo.getReal_price(), currentGoodInfo.getId(), currentGoodInfo.getTitle());
 
                 } else {
-                    ToastUtil.toast2(getActivity(), "支付错误");
+                    ToastUtil.toast(getActivity(), "支付错误");
                 }
 
             }

@@ -1,8 +1,10 @@
 package yc.com.base;
 
 
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +26,7 @@ public class UIUtils {
 
     /**
      * 判断是否是常用11位数手机号
+     *
      * @param phoneNumber
      * @return
      */
@@ -35,18 +38,26 @@ public class UIUtils {
 
     /**
      * 是否是6或者4位数字验证码
+     *
      * @param phoneNumber
-     * @param type 6 或 4
+     * @param type        6 或 4
      * @return
      */
-    public static boolean isNumberCode(String phoneNumber,int type) {
-        String rex="^\\d{4}$";
-        if(type==6){
-            rex="^\\d{6}$";
+    public static boolean isNumberCode(String phoneNumber, int type) {
+        String rex = "^\\d{4}$";
+        if (type == 6) {
+            rex = "^\\d{6}$";
         }
         Pattern p = Pattern.compile(rex);
         Matcher m = p.matcher(phoneNumber);
         return m.matches();
     }
+
+
+    //是否是指定机型
+    public static boolean isAssignPhone() {
+        return TextUtils.equals("xiaomi", Build.BRAND.toLowerCase()) || TextUtils.equals("huawei", Build.BRAND.toLowerCase()) || TextUtils.equals("honor", Build.BRAND.toLowerCase());
+    }
+
 
 }

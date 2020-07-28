@@ -15,8 +15,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.ScreenUtil;
-import com.kk.utils.ToastUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +24,11 @@ import androidx.fragment.app.DialogFragment;
 import rx.functions.Action1;
 import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.english_study.R;
+import yc.com.english_study.base.EnglishStudyApp;
 import yc.com.english_study.base.constant.SpConstant;
+import yc.com.english_study.index.fragment.IndexNoticeDialogFragment;
+import yc.com.rthttplibrary.util.ScreenUtil;
+import yc.com.rthttplibrary.util.ToastUtil;
 
 /**
  * Created by wanglin  on 2019/4/12 14:40.
@@ -83,7 +85,7 @@ public class IndexDialogFragment extends DialogFragment {
 
     protected void initView() {
 
-
+        ((TextView) getView(R.id.tv_privacy)).setText(EnglishStudyApp.privacyPolicy);
         CheckBox cb = (CheckBox) getView(R.id.cb_privacy);
 
         final TextView tvEnterApp = (TextView) getView(R.id.tv_enter_app);
@@ -110,14 +112,17 @@ public class IndexDialogFragment extends DialogFragment {
 //                SharePreferenceUtils.getInstance().putBoolean(Config.index_dialog, true);
                     SPUtils.getInstance().put(SpConstant.INDEX_DIALOG, true);
 
-                    PromotionDialogFragment promotionDialogFragment = new PromotionDialogFragment();
+//                    PromotionDialogFragment promotionDialogFragment = new PromotionDialogFragment();
+//
+//                    if (getActivity() != null) {
+//                        promotionDialogFragment.show(getActivity().getSupportFragmentManager(), "");
+//                    }
+                    IndexNoticeDialogFragment indexNoticeDialogFragment = new IndexNoticeDialogFragment();
+                    indexNoticeDialogFragment.show(getFragmentManager(), "");
 
-                    if (getActivity() != null) {
-                        promotionDialogFragment.show(getActivity().getSupportFragmentManager(), "");
-                    }
                     dismiss();
                 } else {
-                    ToastUtil.toast2(getActivity(), "请先同意用户协议");
+                    ToastUtil.toast(getActivity(), "请先同意用户协议");
                 }
             }
         });

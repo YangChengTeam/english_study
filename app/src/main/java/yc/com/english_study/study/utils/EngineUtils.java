@@ -1,33 +1,19 @@
 package yc.com.english_study.study.utils;
 
-import android.content.Context;
 import android.util.Log;
-
-import com.alibaba.fastjson.TypeReference;
-import com.kk.securityhttp.domain.ResultInfo;
-import com.kk.securityhttp.engin.HttpCoreEngin;
-import com.kk.utils.LogUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.StringReader;
-import java.util.HashMap;
 import java.util.Map;
 
-import rx.Observable;
-import yc.com.english_study.base.constant.UrlConfig;
-import yc.com.english_study.base.model.domain.GoodInfoWrapper;
-import yc.com.english_study.index.model.domain.IndexInfoWrapper;
-import yc.com.english_study.index.model.domain.ShareInfo;
-import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.english_study.pay.HttpUtils;
 import yc.com.english_study.pay.PayListener;
 import yc.com.english_study.pay.XMLUtil;
 import yc.com.english_study.pay.alipay.OrderInfo;
 import yc.com.english_study.pay.alipay.PayInfo;
-import yc.com.english_study.study.model.domain.StudyPages;
-import yc.com.english_study.study_1vs1.model.bean.IndexDialogInfoWrapper;
+import yc.com.rthttplibrary.util.LogUtil;
 
 /**
  * Created by wanglin  on 2018/11/5 16:20.
@@ -36,19 +22,19 @@ public class EngineUtils {
 
     private static String payUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
-    public static Observable<ResultInfo<OrderInfo>> createOrder(Context context, int goods_num, String payway_name, String money, String goods_id) {
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", UserInfoHelper.getUid());
-        params.put("goods_num", goods_num + "");
-        params.put("payway_name", payway_name);
-        params.put("app_id", String.valueOf(7));
-        params.put("money", money);
-        params.put("goods_id", goods_id);
-//        params.put("goods_list", JSON.toJSONString(goods_list));
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.pay_url, new TypeReference<ResultInfo<OrderInfo>>() {
-        }.getType(), params, true, true, true);
-
-    }
+//    public static Observable<ResultInfo<OrderInfo>> createOrder(Context context, int goods_num, String payway_name, String money, String goods_id) {
+//        Map<String, String> params = new HashMap<>();
+//        params.put("user_id", UserInfoHelper.getUid());
+//        params.put("goods_num", goods_num + "");
+//        params.put("payway_name", payway_name);
+//        params.put("app_id", String.valueOf(7));
+//        params.put("money", money);
+//        params.put("goods_id", goods_id);
+////        params.put("goods_list", JSON.toJSONString(goods_list));
+//        return HttpCoreEngin.get(context).rxpost(UrlConfig.pay_url, new TypeReference<ResultInfo<OrderInfo>>() {
+//        }.getType(), params, true, true, true);
+//
+//    }
 
     public static void createOrder(final String name, final String money, final PayListener payListener) {
 
@@ -165,55 +151,5 @@ public class EngineUtils {
     }
 
 
-    public static Observable<ResultInfo<String>> isBindPhone(Context context) {
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", UserInfoHelper.getUid());
 
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.is_bind_mobile_url, new TypeReference<ResultInfo<String>>() {
-        }.getType(), params, true, true, true);
-    }
-
-
-    public static Observable<ResultInfo<GoodInfoWrapper>> getVipInfoList(Context context) {
-
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.vip_info_url, new TypeReference<ResultInfo<GoodInfoWrapper>>() {
-        }.getType(), null, true, true, true);
-
-    }
-
-
-    public static Observable<ResultInfo<IndexDialogInfoWrapper>> getIndexMenuInfo(Context context) {
-
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.index_menu_url, new TypeReference<ResultInfo<IndexDialogInfoWrapper>>() {
-        }.getType(), null, true, true, true);
-    }
-
-
-    public static Observable<ResultInfo<IndexInfoWrapper>> getIndexInfo(Context context) {
-
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.main_index_url, new TypeReference<ResultInfo<IndexInfoWrapper>>() {
-        }.getType(), null, true, true, true);
-
-    }
-
-
-    public static Observable<ResultInfo<StudyPages>> getStudyPages(Context context) {
-
-
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.study_list_url, new TypeReference<ResultInfo<StudyPages>>() {
-        }.getType(), null, true, true, true);
-    }
-
-
-    public static Observable<ResultInfo<StudyPages>> getPhoneticPages(Context context) {
-
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.phonetic_count_url, new TypeReference<ResultInfo<StudyPages>>() {
-        }.getType(), null, true, true, true);
-    }
-
-    public static Observable<ResultInfo<ShareInfo>> getShareInfo(Context context) {
-        return HttpCoreEngin.get(context).rxpost(UrlConfig.share_info_url, new TypeReference<ResultInfo<ShareInfo>>() {
-                }.getType(),
-                null, true, true, true);
-    }
 }

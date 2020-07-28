@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import com.kk.utils.LogUtil;
+
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -12,6 +12,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.List;
 
 import yc.com.blankj.utilcode.util.ToastUtils;
+import yc.com.rthttplibrary.util.LogUtil;
 
 import static android.content.pm.PackageManager.GET_META_DATA;
 

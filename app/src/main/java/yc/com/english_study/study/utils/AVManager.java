@@ -3,14 +3,12 @@ package yc.com.english_study.study.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
+import android.util.Log;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -19,15 +17,12 @@ import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechRecognizer;
-import com.kk.utils.LogUtil;
-import com.kk.utils.ToastUtil;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.player.KSYMediaPlayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -43,7 +38,8 @@ import yc.com.blankj.utilcode.util.ToastUtils;
 import yc.com.english_study.R;
 import yc.com.english_study.study.listener.OnAVManagerListener;
 import yc.com.english_study.study.listener.OnUIApplyControllerListener;
-import yc.com.english_study.study.listener.OnUIPracticeControllerListener;
+import yc.com.rthttplibrary.util.LogUtil;
+import yc.com.rthttplibrary.util.ToastUtil;
 
 /**
  * Created by wanglin  on 2018/11/1 15:32.
@@ -205,7 +201,7 @@ public class AVManager implements OnAVManagerListener {
         mKsyMediaPlayer.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(IMediaPlayer mp, int what, int extra) {
-                ToastUtil.toast2(mContext, "播放失败！");
+                ToastUtil.toast(mContext, "播放失败！");
                 uiApplyControllerListener.playErrorUpdateUI();
                 return false;
             }
@@ -323,7 +319,7 @@ public class AVManager implements OnAVManagerListener {
                     public void onCompletion(MediaPlayer mp) {
                         uiApplyControllerListener.playRecordAfterUpdateUI();
 
-                        if (audioFile!=null){
+                        if (audioFile != null) {
                             audioFile.delete();
                         }
 
@@ -333,13 +329,13 @@ public class AVManager implements OnAVManagerListener {
                     @Override
                     public boolean onError(MediaPlayer mp, int what, int extra) {
                         uiApplyControllerListener.playRecordAfterUpdateUI();
-                        ToastUtil.toast2(mContext, "文件播放失败");
+                        ToastUtil.toast(mContext, "文件播放失败");
                         return false;
 
                     }
                 });
             } else {
-                ToastUtil.toast2(mContext, "请先录音，再播放");
+                ToastUtil.toast(mContext, "请先录音，再播放");
             }
         } catch (Exception e) {
             LogUtils.e("prepare() failed");
@@ -366,6 +362,7 @@ public class AVManager implements OnAVManagerListener {
         public void onError(SpeechError error) {
             uiApplyControllerListener.recordAfterUpdataUI();
 
+            Log.e(getClass().getSimpleName(), "onError: " + error.getErrorDescription());
             // Tips：
             // 错误码：10118(您没有说话)，可能是录音机权限被禁，需要提示用户打开应用的录音权限。
             // 如果使用本地功能（语记）需要提示用户开启语记的录音权限。

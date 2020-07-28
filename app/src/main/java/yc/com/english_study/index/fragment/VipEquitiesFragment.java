@@ -1,7 +1,6 @@
 package yc.com.english_study.index.fragment;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.ScreenUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +9,7 @@ import yc.com.base.BaseDialogFragment;
 import yc.com.base.BasePresenter;
 import yc.com.english_study.R;
 import yc.com.english_study.databinding.FragmentVipEquitiesBinding;
+import yc.com.rthttplibrary.util.ScreenUtil;
 
 /**
  * Created by wanglin  on 2018/11/12 15:36.

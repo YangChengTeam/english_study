@@ -3,17 +3,17 @@ package yc.com.english_study.mine.presenter;
 import android.content.Context;
 
 import com.hwangjr.rxbus.RxBus;
-import com.kk.securityhttp.domain.GoagalInfo;
-import com.kk.securityhttp.domain.ResultInfo;
-import com.kk.securityhttp.net.contains.HttpConfig;
+
 
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
 import yc.com.blankj.utilcode.util.SPUtils;
 import yc.com.english_study.base.constant.BusAction;
+import yc.com.english_study.base.observer.BaseCommonObserver;
 import yc.com.english_study.mine.contract.ShareContract;
 import yc.com.english_study.mine.model.engine.ShareEngine;
+import yc.com.rthttplibrary.config.GoagalInfo;
 
 /**
  * Created by wanglin  on 2019/5/10 10:35.
@@ -31,25 +31,25 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
 
 
     public void share() {
-        Subscription subscription = mEngine.share().subscribe(new Subscriber<ResultInfo<String>>() {
+        mEngine.share().subscribe(new BaseCommonObserver<String>(mContext) {
             @Override
-            public void onCompleted() {
+            public void onSuccess(String data, String message) {
+
+                RxBus.get().post(BusAction.SHARE_SUCCESS, "success");
+                SPUtils.getInstance().put(GoagalInfo.get().uuid, true);
 
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onFailure(int code, String errorMsg) {
 
             }
 
             @Override
-            public void onNext(ResultInfo<String> stringResultInfo) {
-                if (stringResultInfo != null && stringResultInfo.code == HttpConfig.STATUS_OK) {
-                    RxBus.get().post(BusAction.SHARE_SUCCESS, "success");
-                    SPUtils.getInstance().put(GoagalInfo.get().uuid, true);
-                }
+            public void onRequestComplete() {
+
             }
         });
-        mSubscriptions.add(subscription);
+
     }
 }

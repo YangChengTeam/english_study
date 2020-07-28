@@ -4,9 +4,8 @@ import android.os.Build;
 
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
-import com.kk.securityhttp.domain.GoagalInfo;
-import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.share.UMShareImpl;
+import com.tencent.bugly.Bugly;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.analytics.game.UMGameAgent;
 import com.umeng.commonsdk.UMConfigure;
@@ -21,7 +20,13 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import yc.com.blankj.utilcode.util.Utils;
 import yc.com.english_study.base.constant.Config;
+import yc.com.english_study.base.constant.UrlConfig;
+import yc.com.english_study.base.utils.AssetsyUtil;
 import yc.com.english_study.index.utils.UserInfoHelper;
+import yc.com.rthttplibrary.config.GoagalInfo;
+import yc.com.rthttplibrary.config.HttpConfig;
+import yc.com.rthttplibrary.converter.FastJsonConverterFactory;
+import yc.com.rthttplibrary.request.RetrofitHttpRequest;
 import yc.com.toutiao_adv.TTAdManagerHolder;
 
 
@@ -29,6 +34,8 @@ import yc.com.toutiao_adv.TTAdManagerHolder;
  * Created by wanglin  on 2018/10/29 08:52.
  */
 public class EnglishStudyApp extends MultiDexApplication {
+
+    public static String privacyPolicy;
 
     @Override
     public void onCreate() {
@@ -39,10 +46,10 @@ public class EnglishStudyApp extends MultiDexApplication {
             @Override
             public void call(String s) {
                 init();
-                SpeechUtility.createUtility(EnglishStudyApp.this, SpeechConstant.APPID + "=5bdacd35");
+                SpeechUtility.createUtility(EnglishStudyApp.this, SpeechConstant.APPID + "=5eba5107");
             }
         });
-        TTAdManagerHolder.buildConfig(this,Config.TOUTIAO_ADV_ID).debug(false);
+        TTAdManagerHolder.buildConfig(this, Config.TOUTIAO_ADV_ID).debug(false);
         TTAdManagerHolder.init(this, Config.TOUTIAO_ADV_ID);
     }
 
@@ -52,7 +59,7 @@ public class EnglishStudyApp extends MultiDexApplication {
         UMGameAgent.init(this);
         UMGameAgent.setPlayerLevel(1);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-
+        Bugly.init(this, "b0a1fbe70a", false);
         //初始化友盟SDK
         UMShareAPI.get(this);//初始化sd
         UMConfigure.init(this, Config.UMENG_KEY, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
@@ -62,6 +69,10 @@ public class EnglishStudyApp extends MultiDexApplication {
 
         new UMShareImpl.Builder().setWeixin("wx39c1238171bf9430", "ca1a14b8fa32247f4f5efbafa1b070cc")
                 .build(this);
+
+        new RetrofitHttpRequest.Builder()
+                .url(UrlConfig.isDebug ? UrlConfig.debug_url : UrlConfig.base_url)
+                .convert(FastJsonConverterFactory.create());
 
         //全局信息初始化
         GoagalInfo.get().init(getApplicationContext());
@@ -79,13 +90,15 @@ public class EnglishStudyApp extends MultiDexApplication {
                 "DmcluwXXaZXt78mwkSNtgorAhN6fXMiwRFtwywqoC3jYXlKvbh3WpsajsCsbTiCa\n" +
                 "SBq4HbSs5+QTQvmgUTPwQikCAwEAAQ==" +
                 "-----END PUBLIC KEY-----");
+
         setHttpDefaultParams();
 
         UserInfoHelper.getIndexMenuInfo(this);
         UserInfoHelper.getIndexInfo(this);
         UserInfoHelper.getPhoneticPages(this);
         UserInfoHelper.getStudyPages(this);
-
+        UserInfoHelper.login(this);
+        privacyPolicy = AssetsyUtil.readAsset(this, "privacy_policy.txt");
     }
 
     public void setHttpDefaultParams() {
@@ -110,6 +123,7 @@ public class EnglishStudyApp extends MultiDexApplication {
             params.put("app_version", GoagalInfo.get().packageInfo.versionCode + "");
         }
         HttpConfig.setDefaultParams(params);
+
     }
 
 

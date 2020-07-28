@@ -1,8 +1,6 @@
 package yc.com.english_study.category.fragment;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.qq.e.ads.nativ.NativeExpressADView;
@@ -15,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
 import yc.com.base.BasePresenter;
+import yc.com.base.UIUtils;
 import yc.com.english_study.R;
 import yc.com.english_study.base.constant.Config;
 import yc.com.english_study.category.adapter.CategoryPagerAdapter;
@@ -47,7 +46,7 @@ public class CategoryFragment extends BaseFragment<BasePresenter, FragmentCatego
         mDataBinding.mainToolbar.init((BaseActivity) getActivity(), PhoneticActivity.class);
         mDataBinding.mainToolbar.setTvRightTitleAndIcon(getString(R.string.phonetic_introduce), R.mipmap.index_phogetic_introduce);
 
-        if (!(TextUtils.equals("Xiaomi", Build.BRAND) || TextUtils.equals("xiaomi", Build.BRAND)|| UserInfoHelper.isPhonogramOrPhonicsVip()))
+        if (!(UIUtils.isAssignPhone() || UserInfoHelper.isPhonogramOrPhonicsVip()))
             TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, mDataBinding.bottomContainer, Config.TOUTIAO_BANNER_ID, 0, null, 0, null, 0, this);
 //            AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, mDataBinding.bottomContainer, null, Config.TENCENT_ADV_ID, Config.BANNER_TOP_ADV_ID, this);
 

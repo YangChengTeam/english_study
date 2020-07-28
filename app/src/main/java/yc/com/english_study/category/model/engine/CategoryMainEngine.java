@@ -1,19 +1,21 @@
 package yc.com.english_study.category.model.engine;
 
 import android.content.Context;
-import android.widget.ProgressBar;
 
 import com.alibaba.fastjson.TypeReference;
-import com.kk.securityhttp.domain.ResultInfo;
-import com.kk.securityhttp.engin.HttpCoreEngin;
+
 
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Observable;
-import yc.com.base.BaseEngine;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 import yc.com.english_study.base.constant.UrlConfig;
+import yc.com.english_study.base.model.engine.BaseEngine;
 import yc.com.english_study.category.model.domain.WeiKeCategoryWrapper;
+import yc.com.rthttplibrary.bean.ResultInfo;
 
 /**
  * Created by wanglin  on 2018/10/25 14:01.
@@ -26,26 +28,16 @@ public class CategoryMainEngine extends BaseEngine {
 
     public Observable<ResultInfo<WeiKeCategoryWrapper>> getCategoryInfos(int page, int page_size, String pid) {
 
-        Map<String, String> params = new HashMap<>();
-        params.put("page", page + "");
 
-        params.put("page_size", page_size + "");
-
-        params.put("pid", pid);
-
-
-        return HttpCoreEngin.get(mContext).rxpost(UrlConfig.category_url, new TypeReference<ResultInfo<WeiKeCategoryWrapper>>() {
-        }.getType(), params, true, true, true);
+        return request.getCategoryInfos(page, page_size, pid)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
 
     public Observable<ResultInfo<WeiKeCategoryWrapper>> getWeiKeList(int page, int page_size, String pid) {
-        Map<String, String> params = new HashMap<>();
-        params.put("page", page + "");
-        params.put("page_size", page_size + "");
-        params.put("type_id", pid);
 
-        return HttpCoreEngin.get(mContext).rxpost(UrlConfig.weike_list_url, new TypeReference<ResultInfo<WeiKeCategoryWrapper>>() {
-        }.getType(), params, true, true, true);
+
+        return request.getWeiKeList(page, page_size, pid)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }
