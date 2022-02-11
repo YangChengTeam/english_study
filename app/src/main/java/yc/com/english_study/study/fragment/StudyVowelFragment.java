@@ -7,12 +7,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,6 @@ import yc.com.english_study.R;
 import yc.com.english_study.base.constant.BusAction;
 import yc.com.english_study.category.utils.ItemDecorationHelper;
 import yc.com.english_study.databinding.FragmentStudyVowelBinding;
-import yc.com.english_study.index.model.domain.UserInfo;
 import yc.com.english_study.index.utils.UserInfoHelper;
 import yc.com.english_study.mine.activity.PayActivity;
 import yc.com.english_study.mine.fragment.ShareFragment;

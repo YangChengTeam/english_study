@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding.view.RxView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -93,7 +94,7 @@ public abstract class BaseToolBar extends BaseView {
             });
         }
 
-//        Glide.with(mActivity).load(R.mipmap.ic_launcher).asBitmap().centerCrop().into(ivLeftIcon);
+        Glide.with(mActivity).load(R.mipmap.ic_launcher).asBitmap().centerCrop().into(ivLeftIcon);
 
         RxView.clicks(toolbarIntroduce).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
@@ -167,7 +168,6 @@ public abstract class BaseToolBar extends BaseView {
     public void setTitleSize(float titleSize) {
         mTitleTextView.setTextSize(ScreenUtil.dip2px(mContext, titleSize));
     }
-
 
     public void setTvRightTitleAndIcon(String title, int resId) {
         tvRightTitle.setText(title);

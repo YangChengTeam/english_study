@@ -9,8 +9,8 @@ android {
         applicationId "yc.com.english_study"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 26
-        versionName "3.5"
+        versionCode 27
+        versionName "3.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         ndk {
